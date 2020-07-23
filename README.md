@@ -7,7 +7,6 @@
   <a href="https://opensource.org/licenses/MIT" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-    <img alt="Amazon AWS" src="https://img.shields.io/badge/Amazon AWS-232F3E?logo=Amazon AWS&logoColor=white" />
 </p>
 <p>
  <img alt="Docker" src="https://img.shields.io/badge/Docker-black?logo=Docker&logoColor=1488C6" />
@@ -17,9 +16,12 @@
     <img alt="Spring" src="https://img.shields.io/badge/Spring-6DB33F?logo=Spring&logoColor=white" />
     <img alt="MariaDB" src="https://img.shields.io/badge/MariaDB-003545?logo=MariaDB&logoColor=white" />
 </p>
-
-
-
+<p>
+    <img alt="Amazon AWS" src="https://img.shields.io/badge/Amazon AWS-232F3E?logo=Amazon AWS&logoColor=white" />
+    <img alt="Jira Software" src="https://img.shields.io/badge/Jira Software-0052CC?logo=Jira Software&logoColor=white" />
+    <img alt="GitLab" src="https://img.shields.io/badge/GitLab-FCA121?logo=GitLab&logoColor=white" />
+    <img alt="Jenkins" src="https://img.shields.io/badge/Jenkins-D24939?logo=Jenkins&logoColor=white" />
+</p>
 
 > Create your own portfolio blog using 'EXIT'
 
@@ -45,7 +47,27 @@
 
 - Front-end: Vue.cli, node.js
 - Back-end: Spring, Docker,MariaDB
-- Env & etc: AWS-EC2, Eslint, babel, yarn, github, labssafy, Jira
+- Env & etc: AWS-EC2, labssafy, Jira, Jenkins
+- API를 이용하여 서버 구동
+- Vue.cli와 router를 이용하여 SPA를 구현함으로써 빠른 UI/UX 향상
+
+## REST API
+
+#### 유저 정보
+
+---
+
+- GET /user/{uid} //유저 데이터 불러오기
+- PUT /user/{uid} //유저 데이터 수정하기
+
+#### 게시물
+
+---
+
+- GET /post/{range}/{key_word} // Post 검색하기
+- GET /post/{p_id} // Post 상세 페이지
+- PUT /post/update // Post 수정
+- DELETE /post/delete/{u_id}  // Post 삭제
 
 ### ✨ [Demo](i3a501.p.ssafy.io)
 
@@ -55,16 +77,25 @@
 yarn install
 ```
 
-## Usage
+## Run 
 
-```sh
-*
+### Spring Boot
+
+```
+run WebBlogApplication.java  as Spring Boot App
 ```
 
-## Run tests
+### Vue.Cli
 
 ```sh
-*
+yarn serve
+```
+
+### DB
+
+```
+Docker start mariadb
+docker exec -it mariadb mysql -u root -p
 ```
 
 ## Author
