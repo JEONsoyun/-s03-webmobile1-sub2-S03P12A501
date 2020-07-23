@@ -14,7 +14,7 @@ import Delete from '../page/user/Delete'
 
 // 포스트
 import List from '../page/post/List.vue'
- 
+import Write from '../page/post/Write.vue'
 Vue.use(Router) 
  
 export default new Router({
@@ -61,6 +61,10 @@ export default new Router({
       name:constants.URL_TYPE.USER.DELETE,
       component: Delete
     }
-    
+    ,{
+      path: '/post/write',
+      name:constants.URL_TYPE.POST.WRITE,
+      component: Write
+    }
   ]
 })
