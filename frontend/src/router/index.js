@@ -1,70 +1,80 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from "vue";
+import Router from "vue-router";
 
-import constants from '../lib/constants'
+import constants from "../lib/constants";
 
 // 유저
-import Login from '../page/user/Login.vue'
-import Join from '../page/user/Join.vue'
-import Signup from '../page/user/Signup.vue'
-import Authentication from '../page/user/Authentication'
-import Detail from '../page/user/Detail'
-import Update from '../page/user/Update'
-import Delete from '../page/user/Delete'
+import Loginvutify from "../page/user/Loginvuetify.vue";
+import Login from "../page/user/Login.vue";
+import Join from "../page/user/Join.vue";
+import Signup from "../page/user/Signup.vue";
+import Authentication from "../page/user/Authentication";
+import Detail from "../page/user/Detail";
+import Update from "../page/user/Update";
+import Delete from "../page/user/Delete";
 
 // 포스트
-import List from '../page/post/List.vue'
-import Write from '../page/post/Write.vue'
-Vue.use(Router) 
- 
+import List from "../page/post/List.vue";
+import Write from "../page/post/Write.vue"
+Vue.use(Router);
+
 export default new Router({
-  routes: [   
+  routes: [
     // 포스트
-    { 
-      path: '/',
+    {
+      path: "/",
       name: constants.URL_TYPE.POST.MAIN,
       component: List,
     },
     // 로그인/가입
-    { 
-      path: '/user/login',
+    {
+      path: "/user/login",
       name: constants.URL_TYPE.USER.LOGIN,
-      component: Login
+      component: Login,
     },
+    /*
     {
-      path: '/user/join',
+      path: "/user/logintest",
+      name: constants.URL_TYPE.USER.LOGINVUETIFY,
+      component: Loginvutify,
+    },
+    */
+    {
+      path: "/user/join",
       name: constants.URL_TYPE.USER.JOIN,
-      component: Join
+      component: Join,
     },
     {
-      path: '/user/signup',
-      name:constants.URL_TYPE.USER.SIGNUP,
-      component: Signup
+      path: "/user/signup",
+      name: constants.URL_TYPE.USER.SIGNUP,
+      component: Signup,
     },
     {
-      path: '/user/auth',
-      name:constants.URL_TYPE.USER.AUTH,
-      component: Authentication
+      path: "/user/auth",
+      name: constants.URL_TYPE.USER.AUTH,
+      component: Authentication,
     },
     {
-      path: '/user/detail',
-      name:constants.URL_TYPE.USER.DETAIL,
-      component: Detail
+      path: "/user/detail",
+      name: constants.URL_TYPE.USER.DETAIL,
+      component: Detail,
     },
     {
-      path: '/user/update',
-      name:constants.URL_TYPE.USER.UPDATE,
-      component: Update
+      path: "/user/update",
+      name: constants.URL_TYPE.USER.UPDATE,
+      component: Update,
     },
     {
-      path: '/user/delete',
-      name:constants.URL_TYPE.USER.DELETE,
-      component: Delete
-    }
-    ,{
-      path: '/post/write',
-      name:constants.URL_TYPE.POST.WRITE,
+      path: "/user/delete",
+      name: constants.URL_TYPE.USER.DELETE,
+      component: Delete,
+    },
+    /*
+    {
+      path: "/post/write",
+      name: constants.URL_TYPE.POST.LIST,
       component: Write
     }
-  ]
-})
+    */
+  ],
+});

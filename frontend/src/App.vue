@@ -36,7 +36,7 @@ export default {
               constants.URL_TYPE.USER.SIGNUP,
               constants.URL_TYPE.USER.DETAIL,
               constants.URL_TYPE.USER.UPDATE,
-              constants.URL_TYPE.USER.DELETE
+              constants.URL_TYPE.USER.DELETE,
           ];
 
           let isHeader = true;

@@ -73,6 +73,7 @@
 <script>
 import axios from 'axios';
 const storage = window.sessionStorage;
+console.log(storage);
 export default {
     data: () => {
             return {
@@ -86,6 +87,7 @@ export default {
         },
         created() {
             this.nickName = storage.getItem("login_user");
+
             axios({
                 method:"get",
                 url:"http://localhost:8080/user?uid="+this.nickName,
