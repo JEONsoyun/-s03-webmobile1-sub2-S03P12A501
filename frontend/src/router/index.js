@@ -15,10 +15,10 @@ import Update from "../page/user/Update";
 import Delete from "../page/user/Delete";
 
 // 포스트
-import List from "../page/post/List.vue";
-
-Vue.use(Router);
-
+import List from '../page/post/List.vue'
+import Write from '../page/post/Write.vue'
+Vue.use(Router) 
+ 
 export default new Router({
   routes: [
     // 포스트
@@ -64,14 +64,14 @@ export default new Router({
       component: Detail,
     },
     {
-      path: "/user/update",
-      name: constants.URL_TYPE.USER.UPDATE,
-      component: Update,
-    },
-    {
-      path: "/user/delete",
-      name: constants.URL_TYPE.USER.DELETE,
-      component: Delete,
-    },
-  ],
-});
+      path: '/user/delete',
+      name:constants.URL_TYPE.USER.DELETE,
+      component: Delete
+    }
+    ,{
+      path: '/post/write',
+      name:constants.URL_TYPE.POST.WRITE,
+      component: Write
+    }
+  ]
+})
