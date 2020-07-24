@@ -1,67 +1,53 @@
 <template>
-    <div class="user" id="join"> 
-        <div class="wrapC table">
-            <div class="middle">
-                <h1>회원가입</h1>
-                <div class="form-wrap">
-                    <div class="input-wrap">
-                        <input v-model="nickName"
-                            id="nickname"
-                            placeholder="닉네임을 입력해주세요" type="text"/>
-                    </div>
+  <div class="user" id="join">
+    <div class="wrapC table">
+      <div class="middle">
+        <h1>회원가입</h1>
+        <div class="form-wrap">
+          <div class="input-wrap">
+            <input v-model="nickName" id="nickname" placeholder="닉네임을 입력해주세요" type="text" />
+          </div>
 
-                    <div class="input-wrap">
-                        <input v-model="email" 
-                            id="email"
-                            placeholder="이메일을 입력해주세요"
-                            type="text"/>
-                    </div>
+          <div class="input-wrap">
+            <input v-model="email" id="email" placeholder="이메일을 입력해주세요" type="text" />
+          </div>
 
-                    <div class="input-wrap password-wrap">
-                        <input v-model="password"
-                            id="password" 
-                            :type="passwordType"
-                            placeholder="비밀번호를 입력해주세요"/>
-                        <span :class="{active : passwordType==='text'}">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                    </div>
+          <div class="input-wrap password-wrap">
+            <input v-model="password" id="password" :type="passwordType" placeholder="비밀번호를 입력해주세요" />
+            <span :class="{active : passwordType==='text'}">
+              <i class="fas fa-eye"></i>
+            </span>
+          </div>
 
-                    <div class="input-wrap password-wrap">
-                        <input v-model="passwordConfirm" 
-                            id="password-confirm"
-                            :type="passwordConfirmType"
-                            placeholder="비밀번호를 한번 더 입력해주세요"/>
-                        <span :class="{active : passwordConfirmType==='text'}">
-                                <i class="fas fa-eye"></i> 
-                            </span>
-                    </div>
-                </div>
+          <div class="input-wrap password-wrap">
+            <input
+              v-model="passwordConfirm"
+              id="password-confirm"
+              :type="passwordConfirmType"
+              placeholder="비밀번호를 한번 더 입력해주세요"
+            />
+            <span :class="{active : passwordConfirmType==='text'}">
+              <i class="fas fa-eye"></i>
+            </span>
+          </div>
+        </div>
 
-                <label>
-                    <input v-model="isTerm" type="checkbox" id="term"/>
-                    <span>약관에 동의합니다</span>
-                </label>
+        <label>
+          <input v-model="isTerm" type="checkbox" id="term" />
+          <span>약관에 동의합니다</span>
+        </label>
 
-                <span class="go-term">약관 보기</span>
+        <span class="go-term">약관 보기</span>
 
-                <button class="btn" v-on:click="signup"> 
-                    <span>
-                        작성완료
-                    </span>
-                </button>
-                <button class="btn" v-on:click="moveList">
-                    <span>
-                        메인화면
-                    </span>
-                </button>
-            </div>
-
-
-        </div> 
-        
-
+        <button class="btn" v-on:click="signup">
+          <span>작성완료</span>
+        </button>
+        <button class="btn" v-on:click="moveList">
+          <span>메인화면</span>
+        </button>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -108,6 +94,10 @@
                 isTerm: false,
                 passwordType:"password",
                 passwordConfirmType:"password",
+                rules: {
+                required: value => !!value || 'Required.',
+                min: v => v.length >= 8 || 'Min 8 characters',
+                emailMatch: () => ('The email and password you entered don\'t match'),
             }
         }
 
