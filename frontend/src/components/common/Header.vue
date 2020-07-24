@@ -24,8 +24,6 @@
             <div class="search-input">
                 <i class="fas fa-search"></i>
                 <input v-model="keyword" type="text"/>
-                
-                
             </div> 
             <div>
                 
@@ -40,7 +38,7 @@
     import constants from '../../lib/constants'
 
     const storage = window.sessionStorage;
-
+    console.log(storage);
     export default {
         name: 'Header',
         components: { 
@@ -84,6 +82,8 @@
                constants,
                keyword : "",
                nickname:"",
+               password:"",
+               email:"",
                loginStatus:false,
            }
         },

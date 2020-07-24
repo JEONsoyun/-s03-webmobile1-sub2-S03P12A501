@@ -61,7 +61,7 @@
 <script>
     import '../../assets/css/post.scss';
     import axios from "axios";
-
+    const storage = window.sessionStorage;
     export default {
         name:"Post",
         components:{

@@ -35,7 +35,6 @@
 
                   <v-text-field
                     v-model="password"
-                    :append-icon="show ? 'visibility' : 'visibility_off'"
                     :rules="[rules.required, rules.min]"
                     :type="show ? 'text' : 'password'"
                     name="password"
@@ -47,7 +46,6 @@
 
                   <v-text-field
                     v-model="passwordConfirm"
-                    :append-icon="show1 ? 'visibility' : 'visibility_off'"
                     :rules="[rules.required, rules.min, passwordConfirmationRule]"
                     :type="show1 ? 'text' : 'password'"
                     name="input-10-1"
@@ -79,7 +77,10 @@
 
 <script>
 import "../../assets/css/user.scss";
+
+import constants from "../../lib/constants";
 import axios from "axios";
+import { required,rules,valid } from 'vuelidate/lib/validators'
 
 export default {
   components: {},
@@ -100,8 +101,8 @@ export default {
       })
         .then((res) => {
           if (res.data.status) {
-            this.$router.push("/");
             alert("회원가입에 성공했습니다.");
+            this.$router.push("/");
           } else {
           }
         })
@@ -116,15 +117,17 @@ export default {
       show: false,
       show1: false,
       email: "",
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ],
+      rules:{
+        nameRules: [
+          (v) => !!v || "Name is required",
+          (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+        ],
+        emailRules: [
+          (v) => !!v || "E-mail is required",
+          (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+         ],
+      },
       nickName: "",
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-      ],
       password: "",
       passwordConfirm: "",
       isTerm: false,
