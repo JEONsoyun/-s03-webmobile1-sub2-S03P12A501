@@ -7,7 +7,8 @@ import vuetify from './plugins/vuetify';
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: { App,
+   },
   vuetify,
   template: '<App/>'
 })

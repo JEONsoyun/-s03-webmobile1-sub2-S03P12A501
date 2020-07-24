@@ -5,6 +5,7 @@ import constants from "../lib/constants";
 
 // 유저
 import Loginvutify from "../page/user/Loginvuetify.vue";
+import Joinvuetify from "../page/user/Joinvuetify.vue";
 import Login from "../page/user/Login.vue";
 import Join from "../page/user/Join.vue";
 import Signup from "../page/user/Signup.vue";
@@ -32,13 +33,16 @@ export default new Router({
       name: constants.URL_TYPE.USER.LOGIN,
       component: Login,
     },
-    /*
+    {
+      path: "/user/jointest",
+      name: constants.URL_TYPE.USER.JOIN,
+      component: Joinvuetify,
+    },
     {
       path: "/user/logintest",
-      name: constants.URL_TYPE.USER.LOGINVUETIFY,
+      name: constants.URL_TYPE.USER.LOGIN,
       component: Loginvutify,
     },
-    */
     {
       path: "/user/join",
       name: constants.URL_TYPE.USER.JOIN,
@@ -58,11 +62,6 @@ export default new Router({
       path: "/user/detail",
       name: constants.URL_TYPE.USER.DETAIL,
       component: Detail,
-    },
-    {
-      path: "/user/update",
-      name: constants.URL_TYPE.USER.UPDATE,
-      component: Update,
     },
     {
       path: "/user/delete",
