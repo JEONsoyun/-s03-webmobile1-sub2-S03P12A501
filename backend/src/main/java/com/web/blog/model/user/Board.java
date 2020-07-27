@@ -1,6 +1,5 @@
 package com.web.blog.model.user;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,8 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-@Entity (name="board1")
+import lombok.ToString;
+@ToString
+@Entity (name="board")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,8 +24,9 @@ public class Board {
 	private String subject;
 	private String content;
 	private Date created;
-	private int user_Id;
-	private String user_Name;
+	private String uid;
+	private String email;
+	private String tag;
 	private int hit;
 	
 }

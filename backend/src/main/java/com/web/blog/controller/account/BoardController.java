@@ -33,7 +33,7 @@ public class BoardController {
 	}
 	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardController.class)    
 	@GetMapping("list/{id}")
-	public Optional<Board> detailBoard(@RequestParam("id") int id) {
+	public Optional<Board> detailBoard(@RequestParam("id") String id) {
 		
 		return boardDao.findById(id);
 	}
@@ -49,7 +49,7 @@ public class BoardController {
 
 	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)    
 	@DeleteMapping("{id}")
-	public Optional<Board> deleteBoard(@PathVariable("id") int id) {
+	public Optional<Board> deleteBoard(@PathVariable("id") String id) {
 		boardDao.deleteById(id);
 		return null;
 	}
