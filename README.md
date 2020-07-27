@@ -68,6 +68,7 @@
 - GET /post/{p_id} // Post 상세 페이지
 - PUT /post/update // Post 수정
 - DELETE /post/delete/{u_id}  // Post 삭제
+- GET /search/{selected}/{word} // 게시물 검색 
 
 ### ✨ [Demo](i3a501.p.ssafy.io)
 
