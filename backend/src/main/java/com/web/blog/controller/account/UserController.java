@@ -42,17 +42,19 @@ public class UserController {
         Optional<User> user = userDao.findUserByUid(uid);
         if(user.isPresent()) {
         	result.status = true;
-        	result.data= "success";
-			result.object = user.get();
-			response = new ResponseEntity<>(result,HttpStatus.OK);
+        	result.data = "success";
+        	result.object = user.get();
+        	System.out.println(user.get());
+        	response = new ResponseEntity<>(result, HttpStatus.OK);
+        	
         }else {
         	result.status = false;
-			result.data = "can't find by uid";
+			result.data = "find Error";
 			response = new ResponseEntity<>(result,HttpStatus.BAD_REQUEST);
         }
+
         return response;
     }
-	
 	@PutMapping("/user/{uid}")
     @ApiOperation(value = "회원정보수정")
     public Object update(@RequestBody User request) throws Exception {
@@ -62,16 +64,17 @@ public class UserController {
         if(user.isPresent()) {
         	User u = user.get();
         	u.setEmail(request.getEmail());
-        	//u.setPassword(request.getPassword());
         	userDao.save(u);
-        	System.out.println(u);
+        	// Password는 별도 
         	result.status = true;
-        	result.data= "success";
-			result.object = user.get();
-			response = new ResponseEntity<>(result,HttpStatus.OK);
+        	result.data = "success";
+        	result.object = user.get();
+        	System.out.println(user.get());
+        	response = new ResponseEntity<>(result, HttpStatus.OK);
+        	
         }else {
         	result.status = false;
-			result.data = "can't find User";
+			result.data = "find Error";
 			response = new ResponseEntity<>(result,HttpStatus.BAD_REQUEST);
         }
 
@@ -85,15 +88,18 @@ public class UserController {
         Optional<User> user = userDao.findUserByUid(uid);
         if(user.isPresent()) {
         	userDao.delete(user.get());
+        	// Password는 별도 
         	result.status = true;
-        	result.data= "delete success";
-			response = new ResponseEntity<>(result,HttpStatus.OK);
+        	result.data = "success";
+        	System.out.println(user.get());
+        	response = new ResponseEntity<>(result, HttpStatus.OK);
+        	
         }else {
         	result.status = false;
-			result.data = "can't find User";
+			result.data = "find Error";
 			response = new ResponseEntity<>(result,HttpStatus.BAD_REQUEST);
         }
+
         return response;
     }
-
 }
