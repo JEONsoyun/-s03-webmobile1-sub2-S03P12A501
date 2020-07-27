@@ -98,6 +98,11 @@ Docker start mariadb
 docker exec -it mariadb mysql -u root -p
 ```
 
+### Vuetify
+```
+vue install vuetify
+```
+
 ## Author
 
 👨 **Youngwook Go**
