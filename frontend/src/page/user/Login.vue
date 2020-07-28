@@ -57,6 +57,7 @@
         methods: {
             moveList(){
                 this.$router.push("/");
+                
             },
             userLogin(){
                 storage.setItem("jwt-auth-token","");
@@ -66,8 +67,11 @@
                     url:"http://localhost:8080/account/login?email="+this.email+"&password="+this.password,
                 }).then((res)=>{
                     if(res.data.status){
+                        //storage.setItem("jwt-auth-token",res.headers["jwt-auth-token"]);
                         storage.setItem("jwt-auth-token",res.headers["jwt-auth-token"]);
                         storage.setItem("login_user",res.data.object.uid);
+                        storage.setItem("user_email",res.data.object.email);
+                        storage.setItem("user_password",res.data.object.password);
                         
                     }else{
                         alert("로그인에 실패했습니다.");
@@ -82,6 +86,7 @@
         data: () => {
             return {
                 constants,
+                nickname: '',
                 email: '',
                 password: '',
 

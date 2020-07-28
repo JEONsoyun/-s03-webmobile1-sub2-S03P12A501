@@ -100,9 +100,7 @@
                 emailMatch: () => ('The email and password you entered don\'t match'),
             }
         }
-
+        }
     }
 
 </script>
-
-
