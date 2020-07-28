@@ -10,7 +10,7 @@
       <h6 v-if="loginStatus">
         <strong>{{ nickname }}</strong
         >님 환영합니다.
-        <router-link v-bind:to="{ name: constants.URL_TYPE.GET.SEARCH }">
+        <router-link v-bind:to="{ name: constants.URL_TYPE.POST.SEARCH }">
           <v-btn rounded class="ma-2" color="secondary" icon dark>
             <v-icon>mdi-magnify</v-icon>검색하기
           </v-btn>
@@ -21,6 +21,9 @@
         </button>
         <button class="btn" v-on:click="moveDetail">
           회원정보
+        </button>
+        <button class="btn" v-on:click="moveSearch">
+          검색하기
         </button>
       </h6>
 
@@ -72,6 +75,9 @@ export default {
     moveDetail() {
       this.$router.push("/user/detail");
     },
+    moveSearch(){
+      this.$router.push("/search");
+    }
   },
   data: function() {
     return {

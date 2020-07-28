@@ -29,11 +29,13 @@ const routes = [
     component: List,
   },
   // 로그인/가입
+  /*
   {
     path: "/user/login",
     name: constants.URL_TYPE.USER.LOGIN,
     component: Login,
   },
+  */
   {
     path: "/user/jointest",
     name: constants.URL_TYPE.USER.JOIN,
@@ -44,11 +46,13 @@ const routes = [
     name: constants.URL_TYPE.USER.LOGIN,
     component: Loginvutify,
   },
+  /*
   {
     path: "/user/join",
     name: constants.URL_TYPE.USER.JOIN,
     component: Join,
   },
+  */
   {
     path: "/user/signup",
     name: constants.URL_TYPE.USER.SIGNUP,
