@@ -1,38 +1,37 @@
 <template>
-  <div id="header" v-if="isHeader">
-    <h1>
-      <router-link v-bind:to="{ name: constants.URL_TYPE.POST.MAIN }">
-        SS_log
-      </router-link>
-    </h1>
-
-    <div class="right">
-      <h6 v-if="loginStatus">
-        <strong>{{ nickname }}</strong
+    <v-app id="inspire">
+  <div id="header" >
+    <v-app-bar
+      absolute
+      color="teal lighten-3"
+      dark
+    >
+      <v-btn text to="/"><v-toolbar-title>
+        SS_log</v-toolbar-title>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <div v-if="loginStatus">
+        <small class="font-weight-bold">{{ nickname }}</small
         >님 환영합니다.
-        <router-link v-bind:to="{ name: constants.URL_TYPE.GET.SEARCH }">
-          <v-btn rounded class="ma-2" color="secondary" icon dark>
+      <v-btn rounded class="ma-2" color="primary" to="/search" >
             <v-icon>mdi-magnify</v-icon>검색하기
           </v-btn>
-        </router-link>
-
-        <button class="btn" v-on:click="logout">
+      <v-btn rounded class="ma-2" color="#9896f1" v-on:click="logout">
           로그아웃
-        </button>
-        <button class="btn" v-on:click="moveDetail">
+        </v-btn>
+        <v-btn rounded class="ma-2" color="#8c82fc" v-on:click="moveDetail">
           회원정보
-        </button>
-      </h6>
-
-      <router-link
-        v-if="!loginStatus"
-        v-bind:to="{ name: constants.URL_TYPE.USER.LOGIN }"
-        class="login-btn"
-      >
-        로그인
-      </router-link>
+        </v-btn>
+        </div>
+        <div v-if="!loginStatus">        
+        <v-btn rounded class="ma-2" color="#2eb872" to="/user/logintest" >
+            <v-icon>mdi-account-outline</v-icon>로그인
+          </v-btn>
+        </div>
+        
+    </v-app-bar>
     </div>
-  </div>
+    </v-app>
 </template>
 
 <script>
@@ -72,8 +71,11 @@ export default {
     moveDetail() {
       this.$router.push("/user/detail");
     },
+    moveSearch(){
+      this.$router.push("/search");
+    }
   },
-  data: function() {
+  data() {
     return {
       constants,
       keyword: "",

@@ -32,7 +32,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" v-on:click="userLogin">Login</v-btn>
+                <v-btn color="primary" v-on:click="userLogin">로그인</v-btn>
+                <v-btn color="primary" v-on:click="moveJoin">회원가입</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -55,6 +56,9 @@ export default {
   methods: {
     moveList() {
       this.$router.push("/");
+    },
+    moveJoin(){
+      this.$router.push("/user/jointest");
     },
     userLogin() {
       storage.setItem("jwt-auth-token", "");

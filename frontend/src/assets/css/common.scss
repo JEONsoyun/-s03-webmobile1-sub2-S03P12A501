@@ -59,3 +59,13 @@ $f900: 900;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.v-application--wrap {
+    flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0vh;
+    max-width: 100%;
+    position: relative;
+}

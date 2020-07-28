@@ -107,9 +107,7 @@ export default {
       })
         .then((res) => {
           if (res.data.status) {
-            alert("회원가입에 성공했습니다.");
-            this.$router.push("/");
-          } else {
+            this.$router.push("/user/signup");
           }
         })
         .catch((err) => console.log(err.response.data));
@@ -130,8 +128,8 @@ export default {
             (v && v.length <= 10) || "Name must be less than 10 characters",
         ],
         emailRules: [
-          v => !!v || "E-mail is required",
-          v => /.+@.+\..+/.test(v) || "E-mail must be valid",
+          (v) => !!v || "E-mail is required",
+          (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
         ],
       },
       nickName: "",
