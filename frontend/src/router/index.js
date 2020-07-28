@@ -76,6 +76,7 @@ const routes = [
       component: Write
     }
     */
+<<<<<<< HEAD
   //검색
   {
     path: "/search",
@@ -88,6 +89,9 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+=======
+  ],
+>>>>>>> 35d4b1c2c0889c66c74dd7d165af19ce74a8d6ba
 });
 
 // router.beforeEach((to, from, next) => {
