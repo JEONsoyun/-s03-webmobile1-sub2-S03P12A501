@@ -1,15 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import vuetify from './plugins/vuetify';
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import vuetify from "./plugins/vuetify";
+import store from "./store";
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
-  components: { App,
-   },
+  store,
   vuetify,
-  template: '<App/>'
-})
- 
+  render: (h) => h(App),
+}).$mount("#app");
