@@ -55,7 +55,6 @@ export default {
   watch: {},
   methods: {
     moveList() {
-      this.$router.push("/");
     },
     moveJoin(){
       this.$router.push("/user/jointest");
@@ -72,6 +71,7 @@ export default {
           this.password,
       })
         .then((res) => {
+          console.log(res.headers["jwt-auth-token"])
           if (res.data.status) {
             storage.setItem("jwt-auth-token", res.headers["jwt-auth-token"]);
             storage.setItem("login_user", res.data.object.uid);
@@ -79,7 +79,7 @@ export default {
           } else {
             alert("로그인에 실패했습니다.");
           }
-          this.moveList();
+          this.$router.push({name: constants.URL_TYPE.POST.MAIN })
         })
         .catch((e) => {
           alert("로그인에 실패했습니다.");

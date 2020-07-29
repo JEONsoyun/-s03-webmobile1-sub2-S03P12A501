@@ -40,7 +40,11 @@ const routes = [
     name: constants.URL_TYPE.USER.LOGIN,
     component: Loginvutify,
   },
-  /*
+  {
+    path: "/user/detail",
+    name: constants.URL_TYPE.USER.DETAIL,
+    component: Detail,
+  },
   {
     path: "/user/signup",
     name: constants.URL_TYPE.USER.SIGNUP,
@@ -50,11 +54,6 @@ const routes = [
     path: "/user/auth",
     name: constants.URL_TYPE.USER.AUTH,
     component: Authentication,
-  },
-  {
-    path: "/user/detail",
-    name: constants.URL_TYPE.USER.DETAIL,
-    component: Detail,
   },
   {
     path: "/user/delete",
