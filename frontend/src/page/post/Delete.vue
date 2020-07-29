@@ -14,7 +14,7 @@ export default {
         console.log(this.id);
         axios({
             method:"delete",
-            url:"http://localhost:8080/feature/board?id="+this.id,
+            url:"http://localhost:8080/feature/board",
 
         }).then((res)=>{
             let msg = "삭제 처리시 문제가 발생했습니다.";

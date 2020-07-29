@@ -9,7 +9,7 @@
                 
                 <div v-for="(post, id) in list" :key="id">
                     <div class="post-card">
-                        <a>
+                        <a v-on:click="moveDetail">
                             <div :style="{backgroundImage:'url(https://www.ipcc.ch/site/assets/uploads/sites/3/2019/10/img-placeholder.png)'}" class="post-img"/>
                             
                             <div class="contents">
@@ -88,6 +88,9 @@
         methods: {
             moveWrite(){
                 this.$router.push("/post/write");
+            },
+            moveDetail(){
+                this.$router.push("/post/Detail");
             }
         },
         data: () => {
