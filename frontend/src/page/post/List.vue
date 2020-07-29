@@ -1,15 +1,14 @@
 <template>
+<v-app id="inspire">
+    <v-main>
     <div class="post">
         <div class="wrapB">
             <h2>전체글</h2>
-
             <section class="post-list">
-                
-                <div v-for="(post, uid) in list" :key="uid">
+            <div v-for="(post, uid) in list" :key="uid">
                     <div class="post-card">
                         <a>
-                            <div :style="{backgroundImage:'url(https://www.ipcc.ch/site/assets/uploads/sites/3/2019/10/img-placeholder.png)'}" class="post-img"/>
-                            
+                            <img :src="getcolor(post.id)" class="post-img"/>
                             <div class="contents">
                                 <h3>
                                     제목
@@ -20,25 +19,21 @@
                                 
                             </div>
                         </a>
-
                         <div class="writer-wrap">
                             <a>
                                 {{post.nickName}}
                             </a>
                             <span>
-                                ♥ {{post.like}}
+                                {{post.like}}
                             </span>
                         </div>
-                    </div>
                 </div>
-                
-                
-                
-                
-                
+            </div>
+            
+            
             </section>
-
             <div class="tag-list-wrap">
+            <v-btn v-on:click="scrollToTop" class="button-bottom" color="#ffb367"><v-icon>mdi-arrow-collapse-up</v-icon></v-btn>
                 <h4>인기태그</h4>
                 <ul class="tag-list">
                     <li>
@@ -53,35 +48,103 @@
                 </ul>
             </div>
         </div>
-        
-
     </div>
+    
+    </v-main>
+    <infinite-loading  v-on:infinite="infiniteHandler" spinner="waveDots"></infinite-loading>
+  </v-app>
+
 </template>
  
 <script>
-    import '../../assets/css/post.scss';
-    import axios from "axios";
-    const storage = window.sessionStorage;
-    export default {
-        name:"Post",
-        components:{
-            list:""
-        },
-        watch: {
-        },
-        created() {
-            this.nickName = storage.getItem("login_user");
-            axios.get("http://localhost:8080/feature/board/list")
-            .then((res)=>{
-                this.list = res.data;
-            })
-        },
-        methods: {
-        },
-        data: () => {
-            return {
-                list:[]
-            }
+import InfiniteLoading from 'vue-infinite-loading';
+import '../../assets/css/post.scss';
+import axios from "axios";
+const storage = window.sessionStorage;
+export default {
+    name:"Post",
+    data: () => {
+        return {
+            page:1,
+            list:[],
+            photos: [],
+            index:3,
+            limit:1,
         }
-    }
+    },
+    components:{
+        InfiniteLoading,
+        list:"",
+    
+    },
+    watch: {
+    },
+    created() {
+        // this.nickName = storage.getItem("login_user");
+        // axios.get("http://localhost:8080/feature/board/list")
+        // .then((res)=>{
+        //     this.list = res.data;
+        // })
+        // .catch((err) => console.error(err));
+        // this.getPhotos();
+        // this.nickName = storage.getItem("login_user");
+        // axios.get("http://localhost:8080/feature/board/list/?id="+this.limit)
+        // .then((res)=>{
+        //     this.list = res.data
+        // })
+    },
+    methods: {
+        getPost() {
+        this.nickName = storage.getItem("login_user");
+        axios.get("http://localhost:8080/feature/board/list/")
+        .then((res)=>{
+            this.list = res.data;
+        })
+        .catch((err) => console.error(err));
+        this.getPhotos();
+    },
+        getPhotos: function () {
+        const options = {
+            params: {
+            _limit: 10,
+            },
+          }
+        axios
+            .get("https://jsonplaceholder.typicode.com/photos", options)
+            .then((res) => {
+            this.photos = [...this.photos, ...res.data];
+            })
+            .catch((err) => console.error(err));
+        },
+        getcolor(postnum) {
+            let result = this.photos[postnum%10].thumbnailUrl
+           
+            return result
+        },
+        scrollToTop: function () {
+        scroll(0, 0);
+        },
+        infiniteHandler($state) {
+        this.nickName = storage.getItem("login_user");
+        axios.get("http://localhost:8080/feature/board/list/?id="+(this.limit + 10))
+        .then((res)=>{
+            console.log('1')
+            setTimeout(() => {
+                if(res.data.length) {
+                    this.list = this.list.concat(res.data);
+                    $state.loaded();
+                    this.limit +=10
+                    if (this.list.length /10 == 0) {
+                        $state.complete();
+                    }
+                } else {
+                    $state.complete();
+                }
+            }, 10 )
+        })
+        .catch((err) => console.error(err));
+        this.getPhotos();
+    },
+    },
+}
 </script>

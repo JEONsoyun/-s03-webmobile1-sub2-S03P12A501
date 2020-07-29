@@ -71,7 +71,7 @@ export default {
           this.password,
       })
         .then((res) => {
-          console.log(res.headers["jwt-auth-token"])
+          console.dir(res.headers["jwt-auth-token"])
           if (res.data.status) {
             storage.setItem("jwt-auth-token", res.headers["jwt-auth-token"]);
             storage.setItem("login_user", res.data.object.uid);
