@@ -28,3 +28,15 @@ CREATE TABLE IF NOT EXISTS board (
 insert into board (subject, content, email,uid) values("subject1", "content 00001", "test@test.com", "test");
 insert into board (subject, content, email,uid) values("subject2", "content 00002", "test@test.com", "test");
  insert into board (subject, content, email, uid,tag) values("subject0", "content 0000", "test@test.com", "test","test");
+
+CREATE TABLE tb_comment (
+    idx INT NOT NULL AUTO_INCREMENT ,
+    board_idx INT NOT NULL ,
+    content VARCHAR(3000) NOT NULL ,
+    writer VARCHAR(20) NOT NULL ,
+    delete_yn ENUM('Y', 'N') NOT NULL DEFAULT 'N',
+    insert_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    update_time DATETIME DEFAULT NULL ,
+    delete_time DATETIME DEFAULT NULL ,
+    PRIMARY KEY (idx)
+);
