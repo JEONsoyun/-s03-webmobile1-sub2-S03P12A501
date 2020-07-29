@@ -35,10 +35,11 @@ export default {
         constants.URL_TYPE.USER.DETAIL,
         constants.URL_TYPE.USER.UPDATE,
         constants.URL_TYPE.USER.DELETE,
-        constants.URL_TYPE.POST.SEARCH
-      ];
-
-      let isHeader = true;
+        constants.URL_TYPE.POST.SEARCH,
+        constants.URL_TYPE.POST.WRITE,
+        constants.URL_TYPE.POST.WRITECOMPLETE,
+        ];
+  let isHeader = true;
       array.map((path) => {
         if (url === path) isHeader = false;
       });

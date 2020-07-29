@@ -27,14 +27,14 @@ import io.swagger.annotations.ApiResponses;
 		@ApiResponse(code = 404, message = "Not Found", response = BasicResponse.class),
 		@ApiResponse(code = 500, message = "Failure", response = BasicResponse.class) })
 //port 2개를 열어놓을때 ... Vue를 3000번으로 열어줘야한다
-@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "*" })
 @RestController
 public class UserController {
 
 	@Autowired
 	UserDao userDao;
 	
-	@GetMapping("/user/{uid}")
+	@GetMapping("/user/detail/{uid}")
     @ApiOperation(value = "회원정보조회")
     public Object search(@PathVariable String uid) throws Exception {
         ResponseEntity response = null;
@@ -55,7 +55,7 @@ public class UserController {
 
         return response;
     }
-	@PutMapping("/user")
+	@PutMapping("/user/update")
     @ApiOperation(value = "회원정보수정")
     public Object update(@RequestBody User request) throws Exception {
         ResponseEntity response = null;
@@ -85,7 +85,7 @@ public class UserController {
 
         return response;
     }
-    @DeleteMapping("/user/{uid}")
+    @DeleteMapping("/user/delete/{uid}")
     @ApiOperation(value = "회원 탈퇴")
     public Object delete(@PathVariable String uid) {
         ResponseEntity response = null;

@@ -22,7 +22,7 @@ import com.web.blog.model.user.Post;
 
 import io.swagger.annotations.ApiOperation;
 @RestController
-@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "*" })
 @RequestMapping("feature/board")
 public class BoardController {
 	@Autowired

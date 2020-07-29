@@ -1,5 +1,5 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import Router from "vue-router";
 
 import constants from "../lib/constants";
 
@@ -17,9 +17,11 @@ import Delete from "../page/user/Delete";
 // 포스트
 import List from "../page/post/List.vue";
 import Write from "../page/post/Write.vue";
+import WriteComplete from "../page/post/WriteComplete.vue";
+import postDetail from "../page/post/Detail.vue";
 //검색
 import Search from "../views/search/Search.vue";
-Vue.use(VueRouter);
+Vue.use(Router);
 
 const routes = [
   // 포스트
@@ -29,7 +31,13 @@ const routes = [
     component: List,
   },
   // 로그인/가입
-  
+  /*
+  {
+    path: "/user/login",
+    name: constants.URL_TYPE.USER.LOGIN,
+    component: Login,
+  },
+  */
   {
     path: "/user/jointest",
     name: constants.URL_TYPE.USER.JOIN,
@@ -41,6 +49,12 @@ const routes = [
     component: Loginvutify,
   },
   /*
+  {
+    path: "/user/join",
+    name: constants.URL_TYPE.USER.JOIN,
+    component: Join,
+  },
+  */
   {
     path: "/user/signup",
     name: constants.URL_TYPE.USER.SIGNUP,
@@ -54,11 +68,6 @@ const routes = [
 
 
   /*
-    {
-      path: "/post/write",
-      name: constants.URL_TYPE.POST.LIST,
-      component: Write
-    }
     */
    {
     path: "/user/delete",
@@ -77,17 +86,28 @@ const routes = [
     component: Search,
   },
   {
-    path:"/user/update",
-    name:constants.URL_TYPE.POST.UPDATE,
-    component:Update,
+    path: "/post/write",
+    name: constants.URL_TYPE.POST.WRITE,
+    component: Write
   },
-]
+  {
+    path: "/post/writecomplete",
+    name: constants.URL_TYPE.POST.WRITECOMPLETE,
+    component: WriteComplete
+  },
+  {
+    path: "/post/postDetail",
+    name: constants.URL_TYPE.POST.POSTDETAIL,
+    component: postDetail
+  },
 
-const router = new VueRouter({
+];
+
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 // router.beforeEach((to, from, next) => {
 //   const publicPages = ["Login", "Signup", "List"]; // Login 안해도 됨
@@ -103,4 +123,4 @@ const router = new VueRouter({
 //   authRequired && !isLoggedIn ? next({ name: "Login" }) : next();
 // });
 
-export default router
+export default router;
