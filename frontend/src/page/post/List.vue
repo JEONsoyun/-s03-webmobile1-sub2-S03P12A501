@@ -15,18 +15,18 @@
                                     제목
                                 </h3>
                                 <p class="content">{{post.content}}</p>
-                                <span class="date">{{post.date}}</span>  
-                                <span class="comment">댓글 {{post.comment}}개</span>
+                                <span class="date">{{post.created}}</span>  
+                                <span class="comment">댓글 {{post.ccnt}}개</span>
                                 
                             </div>
                         </a>
 
                         <div class="writer-wrap">
                             <a>
-                                {{post.nickName}}
+                                {{post.uid}}
                             </a>
                             <span>
-                                ♥ {{post.like}}
+                                ♥ {{post.lnt}}
                             </span>
                         </div>
                     </div>
