@@ -38,7 +38,7 @@ public class BoardController {
 		List<Post> plist = new ArrayList<Post>();
 		for(Board b : list) {
 			String bid = b.getId()+"";
-			String uid = "test";
+			String uid = "test"; // 여기 수정 필요 
 			int lnt = heartDao.findHeartByBid(bid).size();
 			System.out.println(heartDao.findHeartByBidAndUid(bid, uid));
 			boolean ilike = (heartDao.findHeartByBidAndUid(bid, uid).isPresent());

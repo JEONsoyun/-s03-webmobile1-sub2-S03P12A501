@@ -25,8 +25,11 @@
                             <a>
                                 {{post.uid}}
                             </a>
-                            <span>
+                            <span v-if="post.ilike==true">
                                 ♥ {{post.lnt}}
+                            </span>
+                            <span v-else>
+                                ♡ {{post.lnt}}
                             </span>
                         </div>
                     </div>
