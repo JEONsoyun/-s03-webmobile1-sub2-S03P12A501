@@ -48,7 +48,11 @@ const routes = [
     name: constants.URL_TYPE.USER.LOGIN,
     component: Loginvutify,
   },
-  /*
+  {
+    path: "/user/detail",
+    name: constants.URL_TYPE.USER.DETAIL,
+    component: Detail,
+  },
   {
     path: "/user/join",
     name: constants.URL_TYPE.USER.JOIN,
