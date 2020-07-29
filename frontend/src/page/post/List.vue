@@ -5,10 +5,10 @@
         <div class="wrapB">
             <h2>전체글</h2>
             <section class="post-list">
-            <button class="btn" v-on:click="moveWrite">
+            <v-btn v-on:click="moveWrite">
                     글작성하기
-            </button>
-            <div v-for="(post, uid, id) in list" :key="uid">
+            </v-btn>
+            <div v-for="(post, uid) in list" :key="uid">
                     <div class="post-card">
                         <a v-on:click="moveDetail(post.id)">
                         
@@ -23,11 +23,11 @@
                                 </h3>
                                 <p class="content">{{post.content}}</p>
                                 <span class="date">{{post.created}}</span>  
-                                <span class="comment">댓글 {{post.ccnt}}개</span>
+                                <!-- <span class="comment">댓글 {{post.ccnt}}개</span> -->
                                 
                             </div>
                         </a>
-                        <div class="writer-wrap">
+                        <!-- <div class="writer-wrap">
                             <a>
                                 {{post.uid}}
                             </a>
@@ -37,7 +37,7 @@
                             <span v-else>
                                 ♡ {{post.lnt}}
                             </span>
-                        </div>
+                        </div> -->
                 </div>
             </div>
             
@@ -86,91 +86,94 @@ export default {
     },
     components:{
         InfiniteLoading,
-        list:"",
-    
     },
     watch: {
     },
+    // created() {
+    //         this.nickName = storage.getItem("login_user");
+    //         this.email = storage.getItem("user_email");
+    //         this.id = "1";
+    //         axios.get("http://localhost:8080/feature/board/list")
+    //         .then((res)=>{
+    //             this.list = res.data;
+    //             this.id = res.data.id;
+    //             console.log(this.list);
+    //         })
+    //         .catch((err) => console.error(err));
+    //     },
     created() {
-            this.nickName = storage.getItem("login_user");
-            this.email = storage.getItem("user_email");
-            this.id = "1";
-            axios.get("http://localhost:8080/feature/board/list")
-            .then((res)=>{
-                this.list = res.data;
-                this.id = res.data.id;
-                console.log(this.list);
-            })
-            .catch((err) => console.error(err));
-        },
-    //created() {
-        // this.nickName = storage.getItem("login_user");
-        // axios.get("http://localhost:8080/feature/board/list")
-        // .then((res)=>{
-        //     this.list = res.data;
-        // })
-        // .catch((err) => console.error(err));
-        // this.getPhotos();
-        // this.nickName = storage.getItem("login_user");
-        // axios.get("http://localhost:8080/feature/board/list/?id="+this.limit)
-        // .then((res)=>{
-        //     this.list = res.data
-        // })
+        this.nickName = storage.getItem("login_user");
+        this.email = storage.getItem("user_email");
+        axios.get("http://localhost:8080/feature/board/list")
+        .then((res)=>{
+            this.list = res.data;
+            this.id = res.data.id;
+        })
+        .catch((err) => console.error(err));
+        this.getPhotos();
+        this.nickName = storage.getItem("login_user");
+        axios.get("http://localhost:8080/feature/board/list/?id="+this.limit)
+        .then((res)=>{
+            this.list = res.data
+        })
     },
     methods: {
         getPost() {
-        this.nickName = storage.getItem("login_user");
-        axios.get("http://localhost:8080/feature/board/list/")
-        .then((res)=>{
-            this.list = res.data;
-        })
-        .catch((err) => console.error(err));
-        this.getPhotos();
-    },
-        getPhotos: function () {
-        const options = {
-            params: {
-            _limit: 10,
+            this.nickName = storage.getItem("login_user");
+            axios.get("http://localhost:8080/feature/board/list/")
+            .then((res)=>{
+                this.list = res.data;
+            })
+            .catch((err) => console.error(err));
+            this.getPhotos();
+        },
+        getPhotos() {
+            const options = {
+                params: {
+                _page: this.page++,
+                _limit: 3,
+                },
+            };
+            axios
+                .get("https://jsonplaceholder.typicode.com/photos", options)
+                .then((res) => {
+                this.photos = [...this.photos, ...res.data];
+                })
+                .catch((err) => console.error(err));
             },
-          }
-        axios
-            .get("https://jsonplaceholder.typicode.com/photos", options)
-            .then((res) => {
-            this.photos = [...this.photos];
         getcolor(postnum) {
             let result = this.photos[postnum%10].thumbnailUrl
-           
             return result
         },
-        moveWrite(){
+        moveWrite() {
             this.$router.push("/post/write");
         },
-        moveDetail(){
-            this.$router.push("/post/postDetail?id="+this.list.id);
+        moveDetail(postid) {
+            this.$router.push("/post/postDetail?id="+postid);
         },
-        scrollToTop: function () {
-        scroll(0, 0);
+        scrollToTop() {
+            scroll(0, 0);
         },
         infiniteHandler($state) {
-        this.nickName = storage.getItem("login_user");
-        axios.get("http://localhost:8080/feature/board/list/?id="+(this.limit + 10))
-        .then((res)=>{
-            console.log('1')
-            setTimeout(() => {
-                if(res.data.length) {
-                    this.list = this.list.concat(res.data);
-                    $state.loaded();
-                    this.limit +=10
-                    if (this.list.length /10 == 0) {
+            this.nickName = storage.getItem("login_user");
+            axios.get("http://localhost:8080/feature/board/list/?id="+(this.limit + 10))
+            .then((res)=>{
+                console.log('1')
+                setTimeout(() => {
+                    if(res.data.length) {
+                        this.list = this.list.concat(res.data);
+                        $state.loaded();
+                        this.limit +=10
+                        if (this.list.length /10 == 0) {
+                            $state.complete();
+                        }
+                    } else {
                         $state.complete();
                     }
-                } else {
-                    $state.complete();
-                }
-            }, 10 )
-        })
-        .catch((err) => console.error(err));
-        this.getPhotos();
-    },
+                }, 10 )
+            })
+            .catch((err) => console.error(err));
+            this.getPhotos();
+        },
     },
 }

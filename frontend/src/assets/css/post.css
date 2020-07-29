@@ -148,7 +148,7 @@
   height: 200px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .post .post-list > div .post-card .contents {
