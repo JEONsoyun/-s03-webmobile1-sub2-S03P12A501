@@ -34,7 +34,7 @@ public class UserController {
 	@Autowired
 	UserDao userDao;
 	
-	@GetMapping("/user/{uid}")
+	@GetMapping("/user/detail/{uid}")
     @ApiOperation(value = "회원정보조회")
     public Object search(@PathVariable String uid) throws Exception {
         ResponseEntity response = null;
@@ -55,15 +55,20 @@ public class UserController {
 
         return response;
     }
-	@PutMapping("/user/{uid}")
+	@PutMapping("/user/update")
     @ApiOperation(value = "회원정보수정")
     public Object update(@RequestBody User request) throws Exception {
         ResponseEntity response = null;
         final BasicResponse result = new BasicResponse();
         Optional<User> user = userDao.findUserByUid(request.getUid());
         if(user.isPresent()) {
+        	System.out.println("수정");
+        	System.out.println(request.getPassword());
         	User u = user.get();
         	u.setEmail(request.getEmail());
+        	if(request.getPassword()!=null) {
+        		u.setPassword(request.getPassword());
+        	}
         	userDao.save(u);
         	// Password는 별도 
         	result.status = true;
@@ -80,15 +85,16 @@ public class UserController {
 
         return response;
     }
-    @DeleteMapping("/user/{uid}")
+    @DeleteMapping("/user/delete/{uid}")
     @ApiOperation(value = "회원 탈퇴")
     public Object delete(@PathVariable String uid) {
         ResponseEntity response = null;
         final BasicResponse result = new BasicResponse();
+        System.out.println(uid);
+        System.out.println("탈퇴하기");
         Optional<User> user = userDao.findUserByUid(uid);
         if(user.isPresent()) {
         	userDao.delete(user.get());
-        	// Password는 별도 
         	result.status = true;
         	result.data = "success";
         	System.out.println(user.get());

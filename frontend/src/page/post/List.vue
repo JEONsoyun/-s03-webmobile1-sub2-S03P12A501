@@ -2,17 +2,22 @@
     <div class="post">
         <div class="wrapB">
             <h2>전체글</h2>
-
+            <button class="btn" v-on:click="moveWrite">
+                    글작성하기
+            </button>
             <section class="post-list">
                 
-                <div v-for="(post, uid) in list" :key="uid">
+                <div v-for="(post, id) in list" :key="id">
                     <div class="post-card">
                         <a>
                             <div :style="{backgroundImage:'url(https://www.ipcc.ch/site/assets/uploads/sites/3/2019/10/img-placeholder.png)'}" class="post-img"/>
                             
                             <div class="contents">
                                 <h3>
-                                    제목
+                                    #{{post.id}}
+                                </h3>
+                                <h3>
+                                    {{post.subject}}
                                 </h3>
                                 <p class="content">{{post.content}}</p>
                                 <span class="date">{{post.date}}</span>  
@@ -26,7 +31,7 @@
                                 {{post.nickName}}
                             </a>
                             <span>
-                                ♥ {{post.like}}
+                                ♥ {{post.hit}}
                             </span>
                         </div>
                     </div>
@@ -62,6 +67,7 @@
     import '../../assets/css/post.scss';
     import axios from "axios";
     const storage = window.sessionStorage;
+
     export default {
         name:"Post",
         components:{
@@ -71,12 +77,18 @@
         },
         created() {
             this.nickName = storage.getItem("login_user");
+            this.email = storage.getItem("user_email");
+
             axios.get("http://localhost:8080/feature/board/list")
             .then((res)=>{
                 this.list = res.data;
+                console.log(this.list);
             })
         },
         methods: {
+            moveWrite(){
+                this.$router.push("/post/write");
+            }
         },
         data: () => {
             return {
