@@ -32,7 +32,7 @@ public class CommentController {
 
 
 	@ApiOperation(value = "게시글번호에 해당하는 댓글의 정보를 반환한다.", response = CommentController.class)    
-	@GetMapping("list/details/comments")
+	@GetMapping("list/details/{id}/comments")
 	public List<Comment> detailComment(@RequestParam("id") int id) {
 		List<Comment> list = commentDao.findAll();
 		ArrayList<Comment> rlist = new ArrayList<>();
@@ -56,12 +56,12 @@ public class CommentController {
 		return commentDao.save(comment);
 	}
 
-//	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)    
-//	@DeleteMapping("{id}")
-//	public Optional<Board> deleteBoard(@PathVariable("id") int id) {
-//		boardDao.deleteById(id);
-//		return null;
-//	}
+	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)    
+	@DeleteMapping("list/details/comments/{idx}")
+	public Optional<Comment> deleteComment(@PathVariable("idx") int idx) {
+		commentDao.deleteById(idx);
+		return null;
+	}
 	
 	
 

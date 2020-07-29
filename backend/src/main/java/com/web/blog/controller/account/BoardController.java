@@ -34,7 +34,7 @@ public class BoardController {
 		return list;
 	}
 	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardController.class)    
-	@GetMapping("list/detail/")
+	@GetMapping("list/detail/{id}")
 	public Optional<Board> detailBoard(@RequestParam("id") int id) {
 		
 		return boardDao.findById(id);
