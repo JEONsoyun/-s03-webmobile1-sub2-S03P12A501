@@ -2,7 +2,9 @@
     <div class="post">
         <div class="wrapB">
             <h2>전체글</h2>
-
+            <button class="btn" v-on:click="moveWrite">
+                    글작성하기
+            </button>
             <section class="post-list">
                 
                 <div v-for="(post, id) in list" :key="id">
@@ -84,6 +86,9 @@
             })
         },
         methods: {
+            moveWrite(){
+                this.$router.push("/post/write");
+            }
         },
         data: () => {
             return {

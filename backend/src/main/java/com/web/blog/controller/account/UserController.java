@@ -55,11 +55,7 @@ public class UserController {
 
         return response;
     }
-<<<<<<< HEAD
 	@PutMapping("/user/update")
-=======
-	@PutMapping("/user")
->>>>>>> f089b7861aa9a2b17e63bdb85c11f7e9fefdcba1
     @ApiOperation(value = "회원정보수정")
     public Object update(@RequestBody User request) throws Exception {
         ResponseEntity response = null;

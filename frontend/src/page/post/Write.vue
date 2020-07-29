@@ -14,11 +14,11 @@
                   <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-card-text>
-                  <v-form ref="form" v-model="valid" lazy-validation>
+                  <v-form ref="form">
                     <v-text-field
                       v-model="subject"
                       id="subject"
-                      label="주제?을 입력해주세요"
+                      label="제목을 입력해주세요"
                       name="subject"
                       type="text"
                       :counter="10"
