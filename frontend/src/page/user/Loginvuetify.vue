@@ -86,6 +86,7 @@ export default {
           this.moveList();
         });
     },
+    
   },
   data: () => {
     return {

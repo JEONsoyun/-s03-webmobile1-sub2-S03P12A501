@@ -40,6 +40,7 @@ const routes = [
     name: constants.URL_TYPE.USER.LOGIN,
     component: Loginvutify,
   },
+  /*
   {
     path: "/user/signup",
     name: constants.URL_TYPE.USER.SIGNUP,
