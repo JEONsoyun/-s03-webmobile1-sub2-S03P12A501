@@ -1,6 +1,38 @@
 <template>
   <div id="app">
-    <Header :isHeader="isHeader" />
+    <v-app id="inspire">
+  <div id="header" >
+    <v-app-bar
+      absolute
+      color="teal lighten-3"
+      dark
+    >
+      <v-btn text to="/"><v-toolbar-title>
+        SS_log</v-toolbar-title>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <div v-if="loginStatus">
+        <small class="font-weight-bold">{{ nickname }}</small
+        >님 환영합니다.
+      <v-btn rounded class="ma-2" color="primary" to="/search" >
+            <v-icon>mdi-magnify</v-icon>검색하기
+          </v-btn>
+      <v-btn rounded class="ma-2" color="#9896f1" v-on:click="logout">
+          로그아웃
+        </v-btn>
+        <v-btn rounded class="ma-2" color="#8c82fc" v-on:click="moveDetail">
+          회원정보
+        </v-btn>
+        </div>
+        <div v-if="!loginStatus">        
+        <v-btn rounded class="ma-2" color="#2eb872" to="/user/logintest" >
+            <v-icon>mdi-account-outline</v-icon>로그인
+          </v-btn>
+        </div>
+        
+    </v-app-bar>
+    </div>
+    </v-app>
     <router-view />
   </div>
 </template>
@@ -11,20 +43,35 @@ import "./assets/css/style.scss";
 import Header from "./components/common/Header.vue";
 import constants from "./lib/constants";
 
+const storage = window.sessionStorage;
+  console.log(storage);
+  
 export default {
   name: "App",
-  components: {
-    Header,
+  data() {
+    return {
+      constants,
+      keyword: "",
+      nickname: "",
+      password: "",
+      email: "",
+      loginStatus: false,
+    };
   },
   created() {
-    let url = this.$route.name;
-
+    let url = this.$router.name;
     this.checkUrl(url);
   },
   watch: {
-    $route(to) {
+    $router(to) {
       this.checkUrl(to.name);
     },
+  },
+  mounted() {
+    this.init();
+  },
+  updated() {
+    this.init();
   },
   methods: {
     checkUrl(url) {
@@ -35,26 +82,33 @@ export default {
         constants.URL_TYPE.USER.DETAIL,
         constants.URL_TYPE.USER.UPDATE,
         constants.URL_TYPE.USER.DELETE,
-        constants.URL_TYPE.POST.SEARCH,
-        constants.URL_TYPE.POST.WRITE,
-        constants.URL_TYPE.POST.WRITECOMPLETE,
-        ];
-  let isHeader = true;
-      array.map((path) => {
-        if (url === path) isHeader = false;
-      });
-      this.isHeader = isHeader;
+        constants.URL_TYPE.POST.SEARCH
+      ];
     },
+    init() {
+      if (storage.getItem("jwt-auth-token")) {
+        this.nickname = storage.getItem("login_user");
+        this.loginStatus = true;
+      } else {
+        storage.setItem("jwt-auth-token", "");
+        this.nickname = "";
+        this.loginStatus = false;
+      }
+    },
+    logout() {
+      storage.setItem("jwt-auth-token", "");
+      storage.setItem("login_user", "");
+      this.init();
+    },
+    moveDetail() {
+      this.$router.push("/user/detail");
+    },
+    moveSearch(){
+      this.$router.push("/search");
+    }
   },
-  data: function() {
-    return {
-      isHeader: true,
-      constants,
-    };
-  },
-};
+}
 </script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
