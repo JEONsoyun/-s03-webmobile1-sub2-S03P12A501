@@ -35,7 +35,7 @@ public class BoardController {
 	UserDao userDao;
 
 	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
-	@GetMapping("/list")
+	@GetMapping("list")
 	public List<Board> getBoardList() throws Exception {
 		List<Board> list  = boardDao.findAll();
 		
