@@ -208,14 +208,14 @@ select:focus {
 body {
   font-size: 16px;
   overflow-x: auto;
-  line-height: 1;
+  /* line-height: 1; */
   overflow-y: auto;
   min-width: 1024px;
 }
 
 .wrap {
   width: 100%;
-  float: left;
+  /* float: left; */
 }
 
 .wrapB {
@@ -290,16 +290,13 @@ h2 {
 
 #header {
   width: 100%;
-  float: left;
   position: fixed;
   left: 0;
   top: 0;
   height: 60px;
-  border-bottom: 1px solid #000;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 12px 40px;
-  background-color: #fff;
   z-index: 9;
 }
 
@@ -408,6 +405,15 @@ h2 {
 #header + div {
   padding-top: 60px;
 }
-
+.v-application--wrap {
+    flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0vh;
+    max-width: 100%;
+    position: relative;
+}
 /* media query */
 /*# sourceMappingURL=style.css.map */

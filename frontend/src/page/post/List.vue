@@ -71,7 +71,7 @@
         },
         created() {
             this.nickName = storage.getItem("login_user");
-            axios.get(`http://localhost:8080/poster/list?uid=`+this.nickName)
+            axios.get("http://localhost:8080/feature/board/list")
             .then((res)=>{
                 this.list = res.data;
             })
@@ -80,6 +80,7 @@
         },
         data: () => {
             return {
+                list:[]
             }
         }
     }

@@ -1,8 +1,6 @@
 <template>
-  <div id="app">
-    <v-app id="inspire">
-      <v-main>
-        <v-container fluid>
+  <div>
+        <v-container fluid >
           <v-row align="center">
             <v-col cols="12" sm="6">
               <v-select
@@ -30,8 +28,6 @@
             @keypress.enter="fetchsearchPost(searchData)"
           ></v-text-field>
         </div>
-      </v-main>
-    </v-app>
   </div>
 </template>
 

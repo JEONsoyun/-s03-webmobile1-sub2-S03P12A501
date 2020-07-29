@@ -35,7 +35,7 @@ export default {
         constants.URL_TYPE.USER.DETAIL,
         constants.URL_TYPE.USER.UPDATE,
         constants.URL_TYPE.USER.DELETE,
-        constants.URL_TYPE.GET.SEARCH
+        constants.URL_TYPE.POST.SEARCH
       ];
 
       let isHeader = true;

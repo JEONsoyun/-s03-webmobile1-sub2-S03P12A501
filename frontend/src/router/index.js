@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Router from "vue-router";
+import VueRouter from "vue-router";
 
 import constants from "../lib/constants";
 
@@ -19,7 +19,7 @@ import List from "../page/post/List.vue";
 import Write from "../page/post/Write.vue";
 //검색
 import Search from "../views/search/Search.vue";
-Vue.use(Router);
+Vue.use(VueRouter);
 
 const routes = [
   // 포스트
@@ -29,13 +29,7 @@ const routes = [
     component: List,
   },
   // 로그인/가입
-  /*
-  {
-    path: "/user/login",
-    name: constants.URL_TYPE.USER.LOGIN,
-    component: Login,
-  },
-  */
+  
   {
     path: "/user/jointest",
     name: constants.URL_TYPE.USER.JOIN,
@@ -47,12 +41,6 @@ const routes = [
     component: Loginvutify,
   },
   /*
-  {
-    path: "/user/join",
-    name: constants.URL_TYPE.USER.JOIN,
-    component: Join,
-  },
-  */
   {
     path: "/user/signup",
     name: constants.URL_TYPE.USER.SIGNUP,
@@ -85,14 +73,14 @@ const routes = [
     path: "/search",
     name: constants.URL_TYPE.POST.SEARCH,
     component: Search,
-  },
-];
+  }
+]
 
-const router = new Router({
+const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
 // router.beforeEach((to, from, next) => {
 //   const publicPages = ["Login", "Signup", "List"]; // Login 안해도 됨
@@ -108,4 +96,4 @@ const router = new Router({
 //   authRequired && !isLoggedIn ? next({ name: "Login" }) : next();
 // });
 
-export default router;
+export default router
