@@ -28,14 +28,14 @@ public class BoardController {
 	
 
 	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
-	@GetMapping("/list")
+	@GetMapping("list")
 	public List<Board> getBoardList() throws Exception {
 		List<Board> list  = boardDao.findAll();
 		return list;
 	}
 	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardController.class)    
-	@GetMapping("list/{id}")
-	public Optional<Board> detailBoard(@RequestParam("id") String id) {
+	@GetMapping("list/detail/")
+	public Optional<Board> detailBoard(@RequestParam("id") int id) {
 		
 		return boardDao.findById(id);
 	}
@@ -45,13 +45,13 @@ public class BoardController {
 	@PostMapping("/write")
 	public Board writeBoard(@RequestBody Board board) {
 		//board = new Board(0, "test", "test", null, 0, "unknown", 300);
-
+		
 		return boardDao.save(board);
 	}
 
 	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)    
 	@DeleteMapping("{id}")
-	public Optional<Board> deleteBoard(@PathVariable("id") String id) {
+	public Optional<Board> deleteBoard(@PathVariable("id") int id) {
 		boardDao.deleteById(id);
 		return null;
 	}
