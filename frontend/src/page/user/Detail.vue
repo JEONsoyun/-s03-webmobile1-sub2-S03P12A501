@@ -55,8 +55,9 @@ export default {
                 this.$router.push("/");
             },
             moveUpdate(){
-                this.$router.push("/user/update/");
-            }
+                this.$router.push("/user/update");
+            },
+            
         },
         created() {
             this.nickName = storage.getItem("login_user");

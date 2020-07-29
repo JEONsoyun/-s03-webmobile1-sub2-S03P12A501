@@ -87,7 +87,7 @@ export default {
         },
         created() {
             this.nickName = storage.getItem("login_user");
-            
+            this.email = storage.getItem("user_email");
             axios({
                 method:"get",
                 url:"http://localhost:8080/user/update?uid="+this.nickName,
@@ -114,7 +114,7 @@ export default {
                     data:{
                         email:this.email,
                         password:this.password,
-                        nickname:this.nickName
+                        uid:this.nickName
                     }
                 }).then((res)=>{
                     if(res.data.status){

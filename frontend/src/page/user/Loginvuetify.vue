@@ -79,6 +79,7 @@ export default {
             storage.setItem("user_email", res.data.object.email);
 
             alert("로그인에 성공했습니다.");
+             this.$router.push("/");
           } else {
             alert("로그인에 실패했습니다.");
           }

@@ -64,18 +64,20 @@ const routes = [
     name: constants.URL_TYPE.USER.AUTH,
     component: Authentication,
   },
-  {
-    path: "/user/detail",
-    name: constants.URL_TYPE.USER.DETAIL,
-    component: Detail,
-  },
-  {
+
+
+  /*
+    */
+   {
     path: "/user/delete",
     name: constants.URL_TYPE.USER.DELETE,
     component: Delete,
   },
-  /*
-    */
+   {
+    path: "/user/detail",
+    name: constants.URL_TYPE.USER.DETAIL,
+    component: Detail,
+  },
   //검색
   {
     path: "/search",
@@ -88,7 +90,7 @@ const routes = [
     component: Write
   },
   {
-    path: "/post/write",
+    path: "/post/writecomplete",
     name: constants.URL_TYPE.POST.WRITECOMPLETE,
     component: WriteComplete
   }
