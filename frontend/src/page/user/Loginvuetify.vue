@@ -62,6 +62,7 @@ export default {
     userLogin() {
       storage.setItem("jwt-auth-token", "");
       storage.setItem("login_user", "");
+      storage.setItem("user_email", "");
       axios({
         method: "get",
         url:
@@ -75,7 +76,10 @@ export default {
           if (res.data.status) {
             storage.setItem("jwt-auth-token", res.headers["jwt-auth-token"]);
             storage.setItem("login_user", res.data.object.uid);
+            storage.setItem("user_email", res.data.object.email);
+
             alert("로그인에 성공했습니다.");
+             this.$router.push("/");
           } else {
             alert("로그인에 실패했습니다.");
           }
@@ -86,7 +90,7 @@ export default {
           this.moveList();
         });
     },
-    
+     
   },
   data: () => {
     return {

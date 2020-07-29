@@ -62,6 +62,7 @@
             userLogin(){
                 storage.setItem("jwt-auth-token","");
                 storage.setItem("login_user","");
+                stotage.setItem("user_email","");
                 axios({
                     method:"get",
                     url:"http://localhost:8080/account/login?email="+this.email+"&password="+this.password,

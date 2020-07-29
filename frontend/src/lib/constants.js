@@ -19,6 +19,9 @@ export default {
         },
         POST: {
             MAIN : "main",
+            WRITE :"write",
+            WRITECOMPLETE:"writeComplete",
+            POSTDETAIL:"postDetail"
         },
     }
 }

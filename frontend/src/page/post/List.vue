@@ -5,13 +5,21 @@
         <div class="wrapB">
             <h2>전체글</h2>
             <section class="post-list">
-            <div v-for="(post, uid) in list" :key="uid">
+            <button class="btn" v-on:click="moveWrite">
+                    글작성하기
+            </button>
+            <div v-for="(post, uid, id) in list" :key="uid">
                     <div class="post-card">
-                        <a>
+                        <a v-on:click="moveDetail(post.id)">
+                        
                             <img :src="getcolor(post.id)" class="post-img"/>
+           
                             <div class="contents">
                                 <h3>
-                                    제목
+                                    #{{post.id}}
+                                </h3>
+                                <h3>
+                                    {{post.subject}}
                                 </h3>
                                 <p class="content">{{post.content}}</p>
                                 <span class="date">{{post.date}}</span>  
@@ -70,6 +78,7 @@ export default {
             photos: [],
             index:3,
             limit:1,
+            id:"",
         }
     },
     components:{
@@ -80,6 +89,18 @@ export default {
     watch: {
     },
     created() {
+            this.nickName = storage.getItem("login_user");
+            this.email = storage.getItem("user_email");
+            this.id = "1";
+            axios.get("http://localhost:8080/feature/board/list")
+            .then((res)=>{
+                this.list = res.data;
+                this.id = res.data.id;
+                console.log(this.list);
+            })
+            .catch((err) => console.error(err));
+        },
+    //created() {
         // this.nickName = storage.getItem("login_user");
         // axios.get("http://localhost:8080/feature/board/list")
         // .then((res)=>{
@@ -112,14 +133,17 @@ export default {
         axios
             .get("https://jsonplaceholder.typicode.com/photos", options)
             .then((res) => {
-            this.photos = [...this.photos, ...res.data];
-            })
-            .catch((err) => console.error(err));
-        },
+            this.photos = [...this.photos];
         getcolor(postnum) {
             let result = this.photos[postnum%10].thumbnailUrl
            
             return result
+        },
+        moveWrite(){
+            this.$router.push("/post/write");
+        },
+        moveDetail(){
+            this.$router.push("/post/postDetail?id="+this.list.id);
         },
         scrollToTop: function () {
         scroll(0, 0);
@@ -147,4 +171,3 @@ export default {
     },
     },
 }
-</script>
