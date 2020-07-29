@@ -87,10 +87,10 @@ export default {
         },
         created() {
             this.nickName = storage.getItem("login_user");
-
+            
             axios({
                 method:"get",
-                url:"http://localhost:8080/user?uid="+this.nickName,
+                url:"http://localhost:8080/user/update?uid="+this.nickName,
             }).then((res)=>{
                 if(res.data.status){
                     console.log(res.data);
@@ -110,7 +110,7 @@ export default {
             userUpdate(){
                 axios({
                     method:"put",
-                    url:"http://localhost:8080/user",
+                    url:"http://localhost:8080/user/update",
                     data:{
                         email:this.email,
                         password:this.password,

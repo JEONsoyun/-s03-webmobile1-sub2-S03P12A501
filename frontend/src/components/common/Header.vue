@@ -69,7 +69,7 @@ export default {
       this.init();
     },
     moveDetail() {
-      this.$router.push("/user/detail");
+        this.$router.push("/user/detail?uid="+this.nickname);
     },
     moveSearch(){
       this.$router.push("/search");

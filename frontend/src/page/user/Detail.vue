@@ -7,7 +7,6 @@
                     <div class="input-wrap">
                         <p>닉네임: {{nickName}}</p>
                         <p>이메일: {{email}}</p>
-                        <p>비밀번호: {{password}}</p>
                         <input v-model="nickName"
                             id="nickname" type="text" readonly/>
                     </div>
@@ -15,12 +14,6 @@
                     <div class="input-wrap">
                         <input v-model="email" 
                             id="email"
-                            type="text" readonly/>
-                    </div>
-
-                    <div class="input-wrap">
-                        <input v-model="password"
-                            id="password" 
                             type="text" readonly/>
                     </div>
 
@@ -55,7 +48,6 @@ export default {
             return {
                 email: '',
                 nickName: '',
-                password: '',
             }
         },
         methods: {
@@ -63,22 +55,19 @@ export default {
                 this.$router.push("/");
             },
             moveUpdate(){
-                this.$router.push("/user/update");
+                this.$router.push("/user/update/");
             }
         },
         created() {
             this.nickName = storage.getItem("login_user");
             this.email = storage.getItem("user_email");
-            this.password = storage.getItem("user_password");
             
             axios({
                 method:"get",
-                url:"http://localhost:8080/user?uid="+this.nickName,
+                url:"http://localhost:8080/user/detail?uid="+this.nickName,
             }).then((res)=>{
                 if(res.data.status){
-                    this.email = res.data.object.email;
                     this.password = res.data.object.password;
-
                 }else{
 
                 }

@@ -34,7 +34,7 @@ public class UserController {
 	@Autowired
 	UserDao userDao;
 	
-	@GetMapping("/user/{uid}")
+	@GetMapping("/user/detail/{uid}")
     @ApiOperation(value = "회원정보조회")
     public Object search(@PathVariable String uid) throws Exception {
         ResponseEntity response = null;
@@ -55,7 +55,7 @@ public class UserController {
 
         return response;
     }
-	@PutMapping("/user/{uid}")
+	@PutMapping("/user/update")
     @ApiOperation(value = "회원정보수정")
     public Object update(@RequestBody User request) throws Exception {
         ResponseEntity response = null;
@@ -80,7 +80,7 @@ public class UserController {
 
         return response;
     }
-    @DeleteMapping("/user/{uid}")
+    @DeleteMapping("/user/delete/{uid}")
     @ApiOperation(value = "회원 탈퇴")
     public Object delete(@PathVariable String uid) {
         ResponseEntity response = null;

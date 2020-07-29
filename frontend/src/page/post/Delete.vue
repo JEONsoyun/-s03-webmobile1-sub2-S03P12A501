@@ -10,10 +10,11 @@ const storage = window.sessionStorage;
 
 export default {
     created() {
-        this.uid = storage.getItem("login_user");
+        this.id = list.storage.id;
+        console.log(this.id);
         axios({
             method:"delete",
-            url:"http://localhost:8080/user/delete?uid="+this.uid,
+            url:"http://localhost:8080/feature/board?id="+this.id,
 
         }).then((res)=>{
             let msg = "삭제 처리시 문제가 발생했습니다.";
@@ -30,7 +31,7 @@ export default {
     },
     data: function(){
         return {
-            uid:''
+            id:''
         };
     }
 }
