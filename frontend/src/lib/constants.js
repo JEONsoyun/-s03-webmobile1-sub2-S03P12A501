@@ -20,7 +20,8 @@ export default {
         POST: {
             MAIN : "main",
             WRITE :"write",
-            WRITECOMPLETE:"writeComplete"
+            WRITECOMPLETE:"writeComplete",
+            POSTDETAIL:"postDetail"
         },
     }
 }

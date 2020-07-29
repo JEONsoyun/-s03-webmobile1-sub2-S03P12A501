@@ -1,5 +1,5 @@
 <template>
-  <div class="user" id="join"> 
+  <div class="post" id="join"> 
         <div class="wrapC table">
             <div class="middle">
                 <h1>회원정보</h1>
@@ -18,24 +18,13 @@
                     </div>
 
                 </div>
-
-                <button class="btn" v-on:click="moveUpdate"> 
-                    <span>
-                        정보수정
-                    </span>
-                </button>
-                <button class="btn" v-on:click="moveList">
-                    <span>
-                        메인화면
-                    </span>
-                </button>
             </div>
 
 
         </div> 
         
 
-    </div>
+    </div>  
 </template>
 
 <script>
@@ -46,8 +35,9 @@ console.log(storage);
 export default {
     data: () => {
             return {
-                email: '',
-                nickName: '',
+                subject: '',
+                content: '',
+                id:''
             }
         },
         methods: {
@@ -55,20 +45,20 @@ export default {
                 this.$router.push("/");
             },
             moveUpdate(){
-                this.$router.push("/user/update");
+                this.$router.push("/post/update");
             },
             
         },
         created() {
             this.nickName = storage.getItem("login_user");
             this.email = storage.getItem("user_email");
-            
+            console.log(this.list.id);
             axios({
                 method:"get",
-                url:"http://localhost:8080/user/detail?uid="+this.nickName,
+                url:"http://localhost:8080/feature/board/list/detail?id="+this.list.id,
             }).then((res)=>{
                 if(res.data.status){
-                    this.password = res.data.object.password;
+                     console.log(this.list.id);
                 }else{
 
                 }

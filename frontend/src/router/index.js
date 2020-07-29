@@ -18,6 +18,7 @@ import Delete from "../page/user/Delete";
 import List from "../page/post/List.vue";
 import Write from "../page/post/Write.vue";
 import WriteComplete from "../page/post/WriteComplete.vue";
+import postDetail from "../page/post/Detail.vue";
 //검색
 import Search from "../views/search/Search.vue";
 Vue.use(Router);
@@ -93,7 +94,13 @@ const routes = [
     path: "/post/writecomplete",
     name: constants.URL_TYPE.POST.WRITECOMPLETE,
     component: WriteComplete
-  }
+  },
+  {
+    path: "/post/postDetail",
+    name: constants.URL_TYPE.POST.POSTDETAIL,
+    component: postDetail
+  },
+
 ];
 
 const router = new Router({

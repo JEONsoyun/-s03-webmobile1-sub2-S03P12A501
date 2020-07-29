@@ -23,7 +23,7 @@ import com.web.blog.model.user.Comment;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "*" })
 @RequestMapping("feature/board")
 public class CommentController {
 	@Autowired

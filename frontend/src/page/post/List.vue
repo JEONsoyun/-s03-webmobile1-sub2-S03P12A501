@@ -9,7 +9,7 @@
                 
                 <div v-for="(post, id) in list" :key="id">
                     <div class="post-card">
-                        <a v-on:click="moveDetail">
+                        <a v-on:click="moveDetail(post.id)">
                             <div :style="{backgroundImage:'url(https://www.ipcc.ch/site/assets/uploads/sites/3/2019/10/img-placeholder.png)'}" class="post-img"/>
                             
                             <div class="contents">
@@ -78,10 +78,11 @@
         created() {
             this.nickName = storage.getItem("login_user");
             this.email = storage.getItem("user_email");
-
+            this.id = "1";
             axios.get("http://localhost:8080/feature/board/list")
             .then((res)=>{
                 this.list = res.data;
+                this.id = res.data.id;
                 console.log(this.list);
             })
         },
@@ -90,12 +91,13 @@
                 this.$router.push("/post/write");
             },
             moveDetail(){
-                this.$router.push("/post/Detail");
+                this.$router.push("/post/postDetail?id="+this.list.id);
             }
         },
         data: () => {
             return {
-                list:[]
+                list:[],
+                id:'',
             }
         }
     }
