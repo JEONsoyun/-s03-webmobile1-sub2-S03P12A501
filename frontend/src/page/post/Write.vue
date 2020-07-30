@@ -1,6 +1,4 @@
-<!-- 
 
--->
 <template>
   <div id="app">
     <v-app id="inspire">
@@ -10,7 +8,7 @@
             <v-col cols="12" sm="8" md="4">
               <v-card class="elevation-12">
                 <v-toolbar color="primary" dark flat>
-                  <v-toolbar-title>글올리기</v-toolbar-title>
+                  <v-toolbar-title>글 작성</v-toolbar-title>
                   <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-card-text>

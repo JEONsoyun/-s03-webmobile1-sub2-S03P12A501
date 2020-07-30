@@ -12,10 +12,38 @@
                     <div class="input-wrap">
                         <input v-model="email" 
                             id="email"
-                            type="text" />
+                            type="text" readonly/>
                     </div>
 
-                    
+                    <div class="input-wrap password-wrap">
+                        <input v-model="password" 
+                            id="password" 
+                            :type="passwordType"
+                            placeholder="비밀번호를 입력해주세요"/>
+                        <span :class="{active : passwordType==='text'}">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                    </div>
+
+                    <div class="input-wrap password-wrap">
+                        <input v-model="passwordConfirm" 
+                            id="password-confirm"
+                            :type="passwordConfirmType"
+                            placeholder="비밀번호를 한번 더 입력해주세요"/>
+                        <span :class="{active : passwordConfirmType==='text'}">
+                                <i class="fas fa-eye"></i> 
+                            </span>
+                    </div>
+                    <div class="input-wrap password-wrap">
+                        <input  
+                            id="profile"
+                            type="file"
+                            placeholder="프로필 사진을 등록해주세요"/>
+                    </div>
+                    <div class="input-wrap password-wrap">
+                        <textarea id="introduce" placeholder="자기소개를 등록해주세요" >
+                        </textarea>
+                    </div>
                 </div>
 
                 <button class="btn" v-on:click="userUpdate"> 
@@ -85,9 +113,8 @@ export default {
                     url:"http://i3a501.p.ssafy.io:8080/user/update",
                     data:{
                         email:this.email,
-                        uid:this.nickName,
-                        createDate:'',
-                        userKey:''
+                        password:this.password,
+                        uid:this.nickName
                     }
                 }).then((res)=>{
                     if(res.data.status){

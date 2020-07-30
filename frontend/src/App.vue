@@ -6,7 +6,7 @@
       absolute
       color="teal lighten-3"
       dark
-    >
+    > 
       <v-btn text to="/"><v-toolbar-title>
         SS_log</v-toolbar-title>
       </v-btn>
@@ -41,7 +41,6 @@
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script>
-import Header from "./components/common/Header.vue";
 import constants from "./lib/constants";
 
 const storage = window.sessionStorage;
@@ -104,7 +103,7 @@ export default {
         constants.URL_TYPE.POST.MAIN,
         constants.URL_TYPE.POST.WRITE,
         constants.URL_TYPE.POST.WRITECOMPLETE,
-        conttants.URL_TYPE.POST.DETAIL,
+        constants.URL_TYPE.POST.DETAIL,
       ];
     },
     init() {

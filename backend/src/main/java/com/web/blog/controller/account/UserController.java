@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 		@ApiResponse(code = 403, message = "Forbidden", response = BasicResponse.class),
 		@ApiResponse(code = 404, message = "Not Found", response = BasicResponse.class),
 		@ApiResponse(code = 500, message = "Failure", response = BasicResponse.class) })
-//port 2개를 열어놓을때 ... Vue를 3000번으로 열어줘야한다
+//port 2개를 열어놓을때 ... Vue를 번으로 열어줘야한다
 @CrossOrigin(origins = { "*" })
 @RestController
 public class UserController {

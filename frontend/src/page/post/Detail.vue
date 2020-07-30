@@ -3,16 +3,26 @@
         <div class="wrapC table">
             <div class="middle">
                 <h1>게시글 정보</h1>
+                <div v-if="likestatus">
+                    <v-btn icon color="#DC143C" v-on:click="likePost(id)" >
+                        <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+                </div>
+                <div v-if="!likestatus">
+                    <v-btn icon color="black" v-on:click="likePost(id)">
+                         <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+                </div>
                 <div class="form-wrap">
                     <div class="input-wrap">
-                        <p>제목: {{this.subject}}</p>
-                        <p>내용: {{this.content}}</p>
+                       <p>제목: <input v-model="subject" id="subject" type="text" placeholder=this.subject/></p>
+                        <p>내용:  <input v-model="content" id="content" type="text" placeholder=this.content/>{{this.content}}</p>
                         <p>작성날짜: {{this.created}}</p>
                     </div>
 
                 </div>
 
-                <button class="btn" v-on:click="moveUpdate"> 
+                <button class="btn" v-on:click="moveUpdate()"> 
                     <span>
                         정보수정
                     </span>
@@ -27,6 +37,7 @@
                         글 삭제
                     </span>
                 </button>
+                    
             </div>
         </div> 
         
@@ -43,7 +54,7 @@ export default {
     props:{
         id:{
             type:Number,
-            required:true
+            required:true,
         }
     },
     data: () => {
@@ -51,6 +62,7 @@ export default {
                 subject: '',
                 content: '',
                 created: '',
+                likestatus:false,
             }
         },
         methods: {
@@ -58,7 +70,26 @@ export default {
                 this.$router.push("/");
             },
             moveUpdate(){
-                this.$router.push("/post/update");
+                console.log(this.subject)
+                console.log(this.content)
+                axios({
+                    method:"put",
+                    url:"http://i3a501.ssafy.p.io:8080/feature/board/update",
+                    data :{
+                        subject : this.subject,
+                        content : this.content,
+                        created : this.created,
+                        id : this.id
+                    }
+                }).then((res)=>{
+                    var msg ;
+                    if(res.data.status){
+                        msg = "수정이 완료되었습니다.";
+                        this.$router.push("/");
+                    }
+                    alert(msg);
+                    this.$router.push("/");
+                })
             },
             deletePost(postId){
                 console.log(postId);
@@ -77,6 +108,19 @@ export default {
                     alert(msg);
                     this.$router.push("/");
                 })
+            },
+            likePost(postId){
+                axios({
+                    method: "GET",
+                    url : "http://i3a501.ssafy.p.io:8080/like/"+postId+"/"+storage.getItem("login_user"),
+                    
+                }).then((res)=>{
+                    if(res.data){
+                        likestatus = !likestatus
+                    } else {
+                        likestatus = !!likestatus
+                    }
+                })
             }
             
         },
@@ -88,8 +132,10 @@ export default {
                     this.subject = res.data.subject;
                     this.content = res.data.content;
                     this.created = res.data.created;
+                    this.likePost(this.id)
                 })
                 .catch((err) => console.error(err));
+            
         },
 }
 </script>

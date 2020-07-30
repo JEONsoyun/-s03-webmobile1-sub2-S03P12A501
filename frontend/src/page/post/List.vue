@@ -3,49 +3,44 @@
     <v-main>
     <div class="post">
         <div class="wrapB">
-            <v-btn color="primary" v-on:click="writePost">글 올리기</v-btn>
+            
             <section class="post-list" >
             <div  v-for="(post, uid) in list" :key="uid">
-                    <div class="post-card" v-on:click="showDetail(post.id)">
-                        <a>
-                            <img :src="getcolor(post.id)" class="post-img"/>
-                            <div class="contents">
-                                <h3>#{{post.id}}</h3>
-                                <h3>
-                                    제목 : {{post.subject}}
-                                </h3>
-                                <p class="content">{{post.content}}</p>
-                                <span class="date">{{post.created}}</span>  <br/>
-                                <span class="comment">댓글 {{post.comment}}개</span>
-                                
-                            </div>
-                        </a>
-                        <div class="writer-wrap">
-                            <a>
-                                {{post.nickName}}
-                            </a>
-                            <span>
-                                {{post.like}}
-                            </span>
+                <div class="post-card" v-on:click="showDetail(post.id)">
+                    <a>
+                        <img :src="getcolor(post.id)" class="post-img"/>
+                        
+                        <div class="contents">
+                            <h3>#{{post.id}}  </h3>
+                            <v-btn class="mx-2" color="#DC143C" fab x-small dark>
+                            <v-icon>mdi-heart</v-icon>
+                            </v-btn><small></small>
+                            <h3>
+                                제목 : {{post.subject}}
+                            </h3>
+                            <p class="content">{{post.content}}</p>
+                            <span class="date">{{post.created}}</span>  <br/>
+                            <span class="comment">댓글 {{post.comment}}개</span>
+                            
                         </div>
+                    </a>
+                    <div class="writer-wrap">
+                        <a>
+                            글쓴이 : {{post.uid}}
+                        </a>
+                    </div>
                 </div>
             </div>
-            <!--infinite-loading @infinite="infiniteHandler" slot="append" spinner="waveDots"></infinite-loading -->
+            <infinite-loading @infinite="infiniteHandler" slot="append" spinner="waveDots"></infinite-loading>
             </section>
-            <div class="tag-list-wrap">
-            <v-btn v-on:click="scrollToTop" class="button-bottom" color="#ffb367"><v-icon>mdi-arrow-collapse-up</v-icon></v-btn>
-                <h4>인기태그</h4>
-                <ul class="tag-list">
-                    <li>
-                        #태그1 (8)
-                    </li> 
-                    <li>
-                        #태그2 (5)
-                    </li> 
-                    <li>
-                        #태그3 (2)
-                    </li> 
-                </ul>
+            <div class="tag-list-wrap ">
+            <v-btn class=" button-bottom" v-on:click="scrollToTop" color="#ffb367"><v-icon>mdi-arrow-collapse-up</v-icon></v-btn>
+                <hr/>
+                <div class="tag-list">
+                    <v-btn class="mx-2 mt-1" dark color="indigo" v-on:click="writePost">
+                        <v-icon dark>mdi-pencil</v-icon>
+                        글 올리기</v-btn>
+                </div>
             </div>
         </div>
     </div>
@@ -60,6 +55,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 import '../../assets/css/post.scss';
 import axios from "axios";
 const storage = window.sessionStorage;
+const api = "http://i3a501.p.ssafy.io:8080/"
 export default {
     name:"Post",
     data: () => {
@@ -90,46 +86,49 @@ export default {
             this.$router.push("/post/write");
         },
         getPhotos: function () {
-            axios
-                .get("https://jsonplaceholder.typicode.com/photos")
-                .then((res) => {
-                this.photos = [...this.photos, ...res.data];
-                console.log(this.photos);
-                })
-                .catch((err) => console.error(err));
-            },
-            getPost() {
-            this.nickName = storage.getItem("login_user");
-            axios.get("http://i3a501.p.ssafy.io:8080/feature/board/list/")
-            .then((res)=>{
-                this.list = res.data;
+        axios
+            .get("https://jsonplaceholder.typicode.com/photos")
+            .then((res) => {
+            this.photos = [...this.photos, ...res.data];
             })
             .catch((err) => console.error(err));
         },
+        getPost() {
+        this.nickName = storage.getItem("login_user");
+        axios.get("http://i3a501.p.ssafy.io:8080/feature/board/list/"+this.limit)
+        .then((res)=>{
+            this.list = res.data;
+        })
+        .catch((err) => console.error(err));
+        this.getPhotos();
+    },
         getcolor(postnum) {
-                let result = this.photos[postnum+3].thumbnailUrl;
-                return result;
-            },
-            scrollToTop: function () {
-            scroll(0, 0);
-            },
-            infiniteHandler($state) {
-            this.nickName = storage.getItem("login_user");
-            axios.get("http://i3a501.p.ssafy.io:8080/feature/board/list?id="+this.nickName)
-            .then((res)=>{
-                setTimeout(() => {
-                    if(res.data) {
-                        this.list = this.list.concat(res.data);
-                        $state.loaded();
-                        this.limit+=1
-                    } else {
-                        $state.complete();
-                    }
-                }, 10 )
-            })
-            .catch((err) => console.error(err));
-            this.getPhotos();
+            let result = this.photos[postnum+3].thumbnailUrl
+            return result
         },
+        scrollToTop: function () {
+        scroll(0, 0);
+        },
+        infiniteHandler($state) {
+        this.nickName = storage.getItem("login_user");
+        axios.get("http://i3a501.p.ssafy.io:8080/feature/board/list/"+this.limit)
+        .then((res)=>{
+            console.log("log"+ res.data)
+            setTimeout(() => {
+                if(res.data) {
+                    this.list = this.list.concat(res.data);
+                    $state.loaded();
+                    this.limit+=1
+                } else if (!res.data.id) {
+                    this.limit+=1
+                } else {
+                    $state.complete();
+                }
+            }, 500 )
+        })
+        .catch((err) => console.error(err));
+        this.getPhotos();
+    },
     },
 }
 </script>
@@ -144,5 +143,6 @@ export default {
 .post .post-list {
     min-height: 500px;
     width: 80vm;
+    align-items: left;
 }
 </style>

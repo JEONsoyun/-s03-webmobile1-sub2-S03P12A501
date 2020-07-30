@@ -6,8 +6,6 @@ import constants from "../lib/constants";
 // 유저
 import Loginvutify from "../page/user/Loginvuetify.vue";
 import Joinvuetify from "../page/user/Joinvuetify.vue";
-import Login from "../page/user/Login.vue";
-import Join from "../page/user/Join.vue";
 import Signup from "../page/user/Signup.vue";
 import Authentication from "../page/user/Authentication";
 import Detail from "../page/user/Detail";
@@ -31,13 +29,6 @@ const routes = [
     component: List,
   },
   // 로그인/가입
-  /*
-  {
-    path: "/user/login",
-    name: constants.URL_TYPE.USER.LOGIN,
-    component: Login,
-  },
-  */
   {
     path: "/user/jointest",
     name: constants.URL_TYPE.USER.JOIN,
@@ -53,13 +44,6 @@ const routes = [
     name: constants.URL_TYPE.USER.DETAIL,
     component: Detail,
   },
-  /*
-  {
-    path: "/user/join",
-    name: constants.URL_TYPE.USER.JOIN,
-    component: Join,
-  },
-  */
   {
     path: "/user/signup",
     name: constants.URL_TYPE.USER.SIGNUP,
@@ -70,10 +54,6 @@ const routes = [
     name: constants.URL_TYPE.USER.AUTH,
     component: Authentication,
   },
-
-
-  /*
-    */
    {
     path: "/user/delete",
     name: constants.URL_TYPE.USER.DELETE,
