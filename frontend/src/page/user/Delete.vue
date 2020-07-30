@@ -11,9 +11,10 @@ const storage = window.sessionStorage;
 export default {
     created() {
         this.uid = storage.getItem("login_user");
+        console.log(this.uid);
         axios({
             method:"delete",
-            url:"http://localhost:8080/user/"+this.uid,
+            url:"http://i3a501.p.ssafy.io:8080/user/delete/"+this.uid,
 
         }).then((res)=>{
             let msg = "삭제 처시 문제가 발생했습니다.";
@@ -23,6 +24,8 @@ export default {
                 storage.setItem("login_user","");
                 storage.setItem("user_email","");
                 storage.setItem("user_password","");
+                storage.clear();
+                this.$router.push("/");
             }else{
 
             }

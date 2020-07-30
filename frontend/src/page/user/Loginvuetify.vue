@@ -55,7 +55,6 @@ export default {
   watch: {},
   methods: {
     moveList() {
-      this.$router.push("/");
     },
     moveJoin(){
       this.$router.push("/user/jointest");
@@ -67,12 +66,13 @@ export default {
       axios({
         method: "get",
         url:
-          "http://localhost:8080/account/login?email=" +
+          "http://i3a501.p.ssafy.io:8080/account/login?email=" +
           this.email +
           "&password=" +
           this.password,
       })
         .then((res) => {
+          console.dir(res.headers["jwt-auth-token"])
           if (res.data.status) {
             storage.setItem("jwt-auth-token", res.headers["jwt-auth-token"]);
             storage.setItem("login_user", res.data.object.uid);
@@ -83,7 +83,7 @@ export default {
           } else {
             alert("로그인에 실패했습니다.");
           }
-          this.moveList();
+          this.$router.push({name: constants.URL_TYPE.POST.MAIN })
         })
         .catch((e) => {
           alert("로그인에 실패했습니다.");

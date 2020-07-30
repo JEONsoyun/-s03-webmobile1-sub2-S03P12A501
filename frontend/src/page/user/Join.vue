@@ -68,7 +68,7 @@
             signup(){
                 axios({
                     method:"post",
-                    url:"http://localhost:8080/account/signup",
+                    url:"http://i3a501.p.ssafy.io:8080/account/signup",
                     data:{
                         email:this.email,
                         password:this.password,

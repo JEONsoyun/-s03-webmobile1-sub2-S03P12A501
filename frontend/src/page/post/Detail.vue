@@ -1,30 +1,37 @@
 <template>
-  <div class="post" id="join"> 
+  <div class="user" id="join"> 
         <div class="wrapC table">
             <div class="middle">
-                <h1>회원정보</h1>
+                <h1>게시글 정보</h1>
                 <div class="form-wrap">
                     <div class="input-wrap">
-                        <p>닉네임: {{nickName}}</p>
-                        <p>이메일: {{email}}</p>
-                        <input v-model="nickName"
-                            id="nickname" type="text" readonly/>
-                    </div>
-
-                    <div class="input-wrap">
-                        <input v-model="email" 
-                            id="email"
-                            type="text" readonly/>
+                        <p>제목: {{this.subject}}</p>
+                        <p>내용: {{this.content}}</p>
+                        <p>작성날짜: {{this.created}}</p>
                     </div>
 
                 </div>
+
+                <button class="btn" v-on:click="moveUpdate"> 
+                    <span>
+                        정보수정
+                    </span>
+                </button>
+                <button class="btn" v-on:click="moveList">
+                    <span>
+                        메인화면
+                    </span>
+                </button>
+                <button class="btn" v-on:click="deletePost(id)">
+                    <span>
+                        글 삭제
+                    </span>
+                </button>
             </div>
-
-
         </div> 
         
 
-    </div>  
+    </div>
 </template>
 
 <script>
@@ -33,11 +40,17 @@ import axios from 'axios';
 const storage = window.sessionStorage;
 console.log(storage);
 export default {
+    props:{
+        id:{
+            type:Number,
+            required:true
+        }
+    },
     data: () => {
             return {
                 subject: '',
                 content: '',
-                id:''
+                created: '',
             }
         },
         methods: {
@@ -47,22 +60,36 @@ export default {
             moveUpdate(){
                 this.$router.push("/post/update");
             },
+            deletePost(postId){
+                console.log(postId);
+                axios({
+                    method:"delete",
+                    url:"http://i3a501.p.ssafy.io:8080/feature/board/delete/"+postId,
+
+                    }).then((res)=>{
+                    let msg = postId+"번 글이 삭제가 완료됐습니다.";
+                    if(res.data.status){
+                        msg = "삭제가 완료되었습니다.";
+                        this.$router.push("/");
+                    }else{
+
+                    }
+                    alert(msg);
+                    this.$router.push("/");
+                })
+            }
             
         },
         created() {
-            this.nickName = storage.getItem("login_user");
-            this.email = storage.getItem("user_email");
-            console.log(this.list.id);
-            axios({
-                method:"get",
-                url:"http://localhost:8080/feature/board/list/detail?id="+this.list.id,
-            }).then((res)=>{
-                if(res.data.status){
-                     console.log(this.list.id);
-                }else{
-
-                }
-            })
+            axios
+                .get("http://i3a501.p.ssafy.io:8080/feature/board/list/detail/{id}?id="+this.id)
+                .then((res) => {
+                    console.log(res.data);
+                    this.subject = res.data.subject;
+                    this.content = res.data.content;
+                    this.created = res.data.created;
+                })
+                .catch((err) => console.error(err));
         },
 }
 </script>

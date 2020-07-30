@@ -65,7 +65,7 @@
                 stotage.setItem("user_email","");
                 axios({
                     method:"get",
-                    url:"http://localhost:8080/account/login?email="+this.email+"&password="+this.password,
+                    url:"http://i3a501.p.ssafy.io:8080/account/login?email="+this.email+"&password="+this.password,
                 }).then((res)=>{
                     if(res.data.status){
                         //storage.setItem("jwt-auth-token",res.headers["jwt-auth-token"]);

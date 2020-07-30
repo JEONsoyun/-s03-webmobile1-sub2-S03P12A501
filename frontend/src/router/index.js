@@ -48,6 +48,11 @@ const routes = [
     name: constants.URL_TYPE.USER.LOGIN,
     component: Loginvutify,
   },
+  {
+    path: "/user/detail",
+    name: constants.URL_TYPE.USER.DETAIL,
+    component: Detail,
+  },
   /*
   {
     path: "/user/join",
@@ -74,6 +79,11 @@ const routes = [
     name: constants.URL_TYPE.USER.DELETE,
     component: Delete,
   },
+  {
+    path: "/user/update",
+    name: constants.URL_TYPE.USER.UPDATE,
+    component: Update,
+  },
    {
     path: "/user/detail",
     name: constants.URL_TYPE.USER.DETAIL,
@@ -96,8 +106,9 @@ const routes = [
     component: WriteComplete
   },
   {
-    path: "/post/postDetail",
-    name: constants.URL_TYPE.POST.POSTDETAIL,
+    path: "/post/detail/:id",
+    props: ({params}) => ({id:Number.parseInt(params.id)}),
+    name: constants.URL_TYPE.POST.DETAIL,
     component: postDetail
   },
 

@@ -50,12 +50,13 @@ public class BoardController {
    }
 
    @ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)    
-   @DeleteMapping("{id}")
+   @DeleteMapping("delete/{id}")
    public Optional<Board> deleteBoard(@PathVariable("id") int id) {
+	   Optional<Board> boardId = boardDao.findById(id);
+	   System.out.println(id);
+	   System.out.println(boardId);
       boardDao.deleteById(id);
       return null;
    }
-   
-   
 
 }

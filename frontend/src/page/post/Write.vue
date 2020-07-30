@@ -68,7 +68,7 @@ export default {
     this.uid=storage.getItem("login_user");
       axios({
         method: "post",
-        url: "http://localhost:8080/feature/board/write/",
+        url: "http://i3a501.p.ssafy.io:8080/feature/board/write/",
         data: {
           subject:this.subject,
           content:this.content,
