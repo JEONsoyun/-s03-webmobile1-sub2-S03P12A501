@@ -131,10 +131,10 @@ export default {
                     console.log(res.data);
                     this.subject = res.data.subject;
                     this.content = res.data.content;
-                    this.created = res.data.created;
-                    this.likePost(this.id)
+                    this.created = res.data.created;  
                 })
                 .catch((err) => console.error(err));
+                this.likePost(id)
             
         },
 }

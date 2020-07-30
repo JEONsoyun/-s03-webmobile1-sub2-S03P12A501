@@ -14,7 +14,7 @@
                             <h3>#{{post.id}}  </h3>
                             <v-btn class="mx-2" color="#DC143C" fab x-small dark>
                             <v-icon>mdi-heart</v-icon>
-                            </v-btn><small></small>
+                            </v-btn><small>{{post.lnt}}</small>
                             <h3>
                                 제목 : {{post.subject}}
                             </h3>
@@ -55,7 +55,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 import '../../assets/css/post.scss';
 import axios from "axios";
 const storage = window.sessionStorage;
-const api = "http://i3a501.p.ssafy.io:8080/"
+const api = "http://localhost:8080//"
 export default {
     name:"Post",
     data: () => {
@@ -75,7 +75,7 @@ export default {
     methods: {
         showDetail(id){
             axios
-                .get("http://i3a501.p.ssafy.io:8080/feature/board/list/detail/{id}?id="+id)
+                .get(api+"feature/board/list/detail/{id}?id="+id)
                 .then((res) => {
                     this.$router.push(`/post/detail/${id}`);
                 })
@@ -93,15 +93,6 @@ export default {
             })
             .catch((err) => console.error(err));
         },
-        getPost() {
-        this.nickName = storage.getItem("login_user");
-        axios.get("http://i3a501.p.ssafy.io:8080/feature/board/list/"+this.limit)
-        .then((res)=>{
-            this.list = res.data;
-        })
-        .catch((err) => console.error(err));
-        this.getPhotos();
-    },
         getcolor(postnum) {
             let result = this.photos[postnum+3].thumbnailUrl
             return result
@@ -111,7 +102,7 @@ export default {
         },
         infiniteHandler($state) {
         this.nickName = storage.getItem("login_user");
-        axios.get("http://i3a501.p.ssafy.io:8080/feature/board/list/"+this.limit)
+        axios.get(api+"feature/board/list/"+this.limit)
         .then((res)=>{
             console.log("log"+ res.data)
             setTimeout(() => {

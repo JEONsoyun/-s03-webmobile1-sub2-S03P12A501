@@ -41,13 +41,13 @@ public class HeartController {
 		if (heart.isPresent()) {
 			heartDao.deleteById(new HeartPK(bid, uid));
 			result.status = true;
-			result.data = false;
+			result.data = "";
 			response = new ResponseEntity<>(result, HttpStatus.OK);
 			return response;
 		}
 		heartDao.save(new Heart(bid, uid));
 		result.status = true;
-		result.data = true;
+		result.data = "1";
 		response = new ResponseEntity<>(result, HttpStatus.OK);
 		return response;
 	}
