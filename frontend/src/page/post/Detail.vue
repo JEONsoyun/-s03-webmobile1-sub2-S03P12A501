@@ -3,12 +3,12 @@
         <div class="wrapC table">
             <div class="middle">
                 <h1>게시글 정보</h1>
-                <div v-if="likestatus">
+                <div v-if="this.likestatus">
                     <v-btn icon color="#DC143C" v-on:click="likePost(id)" >
                         <v-icon>mdi-heart</v-icon>
                     </v-btn>
                 </div>
-                <div v-if="!likestatus">
+                <div v-if="!this.likestatus">
                     <v-btn icon color="black" v-on:click="likePost(id)">
                          <v-icon>mdi-heart</v-icon>
                     </v-btn>
@@ -114,13 +114,9 @@ export default {
                     method: "GET",
                     url : "http://i3a501.ssafy.p.io:8080/like/"+postId+"/"+storage.getItem("login_user"),
                     
-                }).then((res)=>{
-                    if(res.data){
-                        likestatus = !likestatus
-                    } else {
-                        likestatus = !!likestatus
-                    }
-                })
+                }).then(
+                        this.likestatus = !this.likestatus
+                    )
             }
             
         },
@@ -131,10 +127,11 @@ export default {
                     console.log(res.data);
                     this.subject = res.data.subject;
                     this.content = res.data.content;
-                    this.created = res.data.created;  
+                    this.created = res.data.created;
+                    this.likestatus = res.data.ilike  
                 })
                 .catch((err) => console.error(err));
-                this.likePost(id)
+                
             
         },
 }

@@ -7,34 +7,34 @@
             <section class="post-list" >
             <div  v-for="(post, uid) in list" :key="uid">
                 <div class="post-card" v-on:click="showDetail(post.id)">
-                    <a>
+                    <a style="color: black">
                         <img :src="getcolor(post.id)" class="post-img"/>
                         
-                        <div class="contents">
-                            <h3>#{{post.id}}  </h3>
-                            <v-btn class="mx-2" color="#DC143C" fab x-small dark>
-                            <v-icon>mdi-heart</v-icon>
-                            </v-btn><small>{{post.lnt}}</small>
+                        <v-row>
+                            <v-col>
+                                <v-icon>mdi-account-edit-outline</v-icon>  {{post.uid}}
+                            </v-col>
+                            <v-col cols="auto">
+                            <v-btn color="#DC143C" fab x-small dark>
+                                <v-icon>mdi-heart</v-icon>{{post.lnt}}
+                            </v-btn>
+                            </v-col>
+                        </v-row>
                             <h3>
-                                제목 : {{post.subject}}
+                                {{post.subject}}
                             </h3>
+                            <hr/>
                             <p class="content">{{post.content}}</p>
                             <span class="date">{{post.created}}</span>  <br/>
-                            <span class="comment">댓글 {{post.comment}}개</span>
+                            <span class="comment"><v-icon>mdi-comment-multiple-outline</v-icon>  {{post.cnt}}</span>
                             
-                        </div>
                     </a>
-                    <div class="writer-wrap">
-                        <a>
-                            글쓴이 : {{post.uid}}
-                        </a>
-                    </div>
                 </div>
             </div>
             <infinite-loading @infinite="infiniteHandler" slot="append" spinner="waveDots"></infinite-loading>
             </section>
-            <div class="tag-list-wrap ">
-            <v-btn class=" button-bottom" v-on:click="scrollToTop" color="#ffb367"><v-icon>mdi-arrow-collapse-up</v-icon></v-btn>
+            <div class="tag-list-wrap justify-center">
+            <v-btn class="mx-8 my-2" v-on:click="scrollToTop" color="#ffb367"><v-icon>mdi-arrow-collapse-up</v-icon></v-btn>
                 <hr/>
                 <div class="tag-list">
                     <v-btn class="mx-2 mt-1" dark color="indigo" v-on:click="writePost">
@@ -70,7 +70,6 @@ export default {
     },
     mounted(){
         this.getPhotos();
-        this.getPost();
     },
     methods: {
         showDetail(id){
