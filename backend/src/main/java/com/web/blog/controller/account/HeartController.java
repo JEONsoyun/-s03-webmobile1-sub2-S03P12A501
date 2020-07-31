@@ -25,7 +25,7 @@ import com.web.blog.model.user.Post;
 
 import io.swagger.annotations.ApiOperation;
 @RestController
-@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "*" })
 public class HeartController {
 
 	@Autowired
@@ -34,22 +34,29 @@ public class HeartController {
 	
 	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
 	@GetMapping("/like/{bid}/{uid}")
-	public Object like(@PathVariable String bid,@PathVariable String uid) throws Exception {
+	public Object like(@PathVariable String bid, @PathVariable String uid) throws Exception {
 		Optional<Heart> heart = heartDao.findHeartByBidAndUid(bid, uid);
 		ResponseEntity response = null;
-        final BasicResponse result = new BasicResponse();
-		if(heart.isPresent()) {
+		final BasicResponse result = new BasicResponse();
+		if (heart.isPresent()) {
 			heartDao.deleteById(new HeartPK(bid, uid));
 			result.status = true;
-        	result.data = "success";
-        	response = new ResponseEntity<>(result, HttpStatus.OK);
-        	return response;
+			result.data = "";
+			response = new ResponseEntity<>(result, HttpStatus.OK);
+			return response;
 		}
 		heartDao.save(new Heart(bid, uid));
 		result.status = true;
-    	result.data = "success";
-    	response = new ResponseEntity<>(result, HttpStatus.OK);
-    	return response;
+		result.data = "1";
+		response = new ResponseEntity<>(result, HttpStatus.OK);
+		return response;
 	}
+	
+	@ApiOperation(value = "하트의 개수를 반환", response = List.class)
+   @GetMapping("/heart/{bid}")
+   public int countLike(@PathVariable String bid) throws Exception {
+      List<Heart> heart = heartDao.findHeartByBid(bid);
+       return heart.size();
+   }
 
 }

@@ -1,4 +1,4 @@
-﻿# Dump of table user
+# Dump of table user
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user`;
