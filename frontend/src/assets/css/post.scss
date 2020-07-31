@@ -149,6 +149,7 @@
                     border:1px solid #000;
                     height:200px;
                     box-sizing: border-box;
+                    opacity: 0.5;
                 }
                 .contents {
                     @include wrap;
@@ -189,6 +190,11 @@
                         float:right;
                     }
                 }
+            .button-bottom {
+                position: fixed;
+                right: 20vw;
+                bottom: 20vh;
+            }
             }
         }
     }

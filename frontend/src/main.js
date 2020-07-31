@@ -11,5 +11,6 @@ new Vue({
   store,
   VueSession,
   vuetify,
+  InfiniteLoading,
   render: (h) => h(App),
 }).$mount("#app");
