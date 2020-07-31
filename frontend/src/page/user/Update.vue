@@ -72,6 +72,7 @@
 
 <script>
 import axios from 'axios';
+import SERVER from "@/api/api";
 const storage = window.sessionStorage;
 console.log(storage);
 export default {
@@ -90,7 +91,7 @@ export default {
             this.email = storage.getItem("user_email");
             axios({
                 method:"get",
-                url:"http://i3a501.p.ssafy.io:8080/user/update?uid="+this.nickName,
+                url:SERVER.URL+"/user/update?uid="+this.nickName,
             }).then((res)=>{
                 if(res.data.status){
                     console.log(res.data);
@@ -110,7 +111,7 @@ export default {
             userUpdate(){
                 axios({
                     method:"put",
-                    url:"http://i3a501.p.ssafy.io:8080/user/update",
+                    url:SERVER.URL+"/user/update",
                     data:{
                         email:this.email,
                         password:this.password,

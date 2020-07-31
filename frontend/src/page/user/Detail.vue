@@ -37,7 +37,7 @@
 
 <script>
 import axios from 'axios';
-
+import SERVER from "@/api/api";
 const storage = window.sessionStorage;
 
 export default {
@@ -65,7 +65,7 @@ export default {
             
             axios({
                 method:"get",
-                url:"http://i3a501.p.ssafy.io:8080/user/detail?uid="+this.nickName,
+                url:SERVER.URL+"/user/detail?uid="+this.nickName,
             }).then((res)=>{
                 if(res.data.status){
                     this.password = res.data.object.password;

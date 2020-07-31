@@ -47,6 +47,7 @@
 
 <script>
 import axios from 'axios';
+import SERVER from "@/api/api";
 
 const storage = window.sessionStorage;
 console.log(storage);

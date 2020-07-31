@@ -48,7 +48,7 @@
 
 <script>
 import "../../assets/css/user.scss";
-
+import SERVER from "@/api/api";
 import constants from "../../lib/constants";
 import axios from "axios";
 import { required, rules, valid } from "vuelidate/lib/validators";
@@ -66,7 +66,7 @@ export default {
     this.uid=storage.getItem("login_user");
       axios({
         method: "post",
-        url: "http://i3a501.p.ssafy.io:8080/feature/board/write/",
+        url: SERVER.URL+"/feature/board/write/",
         data: {
           subject:this.subject,
           content:this.content,

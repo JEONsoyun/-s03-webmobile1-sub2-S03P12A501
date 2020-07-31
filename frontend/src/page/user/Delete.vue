@@ -7,14 +7,14 @@
 <script>
 import axios from 'axios';
 const storage = window.sessionStorage;
-
+import SERVER from "@/api/api";
 export default {
     created() {
         this.uid = storage.getItem("login_user");
         console.log(this.uid);
         axios({
             method:"delete",
-            url:"http://i3a501.p.ssafy.io:8080/user/delete/"+this.uid,
+            url:SERVER.URL+"/user/delete/"+this.uid,
 
         }).then((res)=>{
             let msg = "삭제 처시 문제가 발생했습니다.";

@@ -1,4 +1,4 @@
-<template>
+con<template>
   <div class="user" id="join"> 
         <div class="wrapC table">
             <div class="middle">
@@ -30,7 +30,7 @@
 
 <script>
 import axios from 'axios';
-
+import SERVER from "@/api/api";
 const storage = window.sessionStorage;
 console.log(storage);
 export default {
@@ -58,7 +58,7 @@ export default {
                 console.log(postId);
                 axios({
                     method:"delete",
-                    url:"http://localhost:8080/feature/board/delete/"+postId,
+                    url:SERVER.URL+"/feature/board/delete/"+postId,
 
                     }).then((res)=>{
                     let msg = postId+"번 글이 삭제가 완료됐습니다.";
@@ -76,7 +76,7 @@ export default {
         },
         created() {
             axios
-                .get("http://localhost:8080/feature/board/list/detail/{id}?id="+this.id)
+                .get(SERVER.URL+"/feature/board/list/detail/{id}?id="+this.id)
                 .then((res) => {
                     console.log(res.data);
                     this.subject = res.data.subject;

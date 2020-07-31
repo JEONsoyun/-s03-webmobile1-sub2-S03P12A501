@@ -3,13 +3,12 @@
     <v-main>
     <div class="post">
         <div class="wrapB">
-            
             <section class="post-list" >
             <div  v-for="(post, uid) in list" :key="uid">
                 <div class="post-card" v-on:click="showDetail(post.id)">
                     <a style="color: black">
                         <img :src="getcolor(post.id)" class="post-img"/>
-                        
+                        <div class="contents">
                         <v-row>
                             <v-col>
                                 <v-icon>mdi-account-edit-outline</v-icon>  {{post.uid}}
@@ -27,7 +26,7 @@
                             <p class="content">{{post.content}}</p>
                             <span class="date">{{post.created}}</span>  <br/>
                             <span class="comment"><v-icon>mdi-comment-multiple-outline</v-icon>  {{post.cnt}}</span>
-                            
+                        </div> 
                     </a>
                 </div>
             </div>
@@ -54,8 +53,9 @@
 import InfiniteLoading from 'vue-infinite-loading';
 import '../../assets/css/post.scss';
 import axios from "axios";
+import SERVER from "@/api/api";
 const storage = window.sessionStorage;
-const api = "http://localhost:8080//"
+
 export default {
     name:"Post",
     data: () => {
@@ -74,7 +74,7 @@ export default {
     methods: {
         showDetail(id){
             axios
-                .get(api+"feature/board/list/detail/{id}?id="+id)
+                .get(SERVER.URL+"/feature/board/list/detail/{id}?id="+id)
                 .then((res) => {
                     this.$router.push(`/post/detail/${id}`);
                 })
@@ -101,7 +101,7 @@ export default {
         },
         infiniteHandler($state) {
         this.nickName = storage.getItem("login_user");
-        axios.get(api+"feature/board/list/"+this.limit)
+        axios.get(SERVER.URL+"/feature/board/list/"+this.limit)
         .then((res)=>{
             console.log("log"+ res.data)
             setTimeout(() => {
