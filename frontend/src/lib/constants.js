@@ -18,10 +18,12 @@ export default {
             DELETE: 'delete',
         },
         POST: {
+            SEARCH: "search",
             MAIN : "main",
             WRITE :"write",
             WRITECOMPLETE:"writeComplete",
-            POSTDETAIL:"postDetail"
+            POSTDETAIL:"postDetail",
+            DETAIL:"detail",
         },
     }
 }

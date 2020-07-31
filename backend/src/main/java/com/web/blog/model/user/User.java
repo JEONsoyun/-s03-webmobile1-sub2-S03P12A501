@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,7 +26,7 @@ public class User {
     @Id
     private String uid;
 
-    //@JsonIgnore
+    @JsonIgnore
     private String password;
     private String email;
 

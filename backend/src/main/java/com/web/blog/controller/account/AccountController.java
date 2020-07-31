@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import jdk.internal.org.jline.utils.Log;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,12 +63,13 @@ public class AccountController {
 			User loginUser = userOpt.get();
 
 			String token = jwtService.create(loginUser);
-
+			
 			res.setHeader("jwt-auth-token", token);
 
 			result.status = true;
 			result.data = "success";
 			result.object = loginUser;
+			
 			response = new ResponseEntity<>(result, HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -76,13 +78,6 @@ public class AccountController {
 		return response;
 	}
 
-	@GetMapping("/account/logout")
-	@ApiOperation(value="로그아웃")
-	public Object logout(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		session.invalidate();
-		return "/account";
-	}
 	
 	@PostMapping("/account/signup")
 	@ApiOperation(value = "가입하기")

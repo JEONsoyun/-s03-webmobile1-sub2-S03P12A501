@@ -398,22 +398,5 @@ h2 {
   cursor: pointer;
 }
 
-#header .right .login-component .profile .menu li:last-of-type {
-  border-bottom: none;
-}
-
-#header + div {
-  padding-top: 60px;
-}
-.v-application--wrap {
-    flex: 1 1 auto;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 0vh;
-    max-width: 100%;
-    position: relative;
-}
 /* media query */
 /*# sourceMappingURL=style.css.map */
