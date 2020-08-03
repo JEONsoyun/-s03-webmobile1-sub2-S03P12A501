@@ -61,6 +61,7 @@ export default {
     name:"Post",
     data: () => {
         return {
+            posts:[],
             list:[],
             photos: [],
             limit:1,
@@ -70,10 +71,20 @@ export default {
         InfiniteLoading,
     },
     mounted(){
-        this.getPhotos();
+        this.getPosts()
     },
     
     methods: {
+        getPosts() {
+            this.nickName = storage.getItem("login_user");
+            axios.get(SERVER.URL+"/feature/board/list/")
+            .then((res)=>{
+                    if(res.data) {
+                        this.posts = res.data}
+                        console.log(this.posts)
+            })
+            .catch((err) => console.error(err));
+        },
         showDetail(id){
             axios
                 .get(SERVER.URL+"/feature/board/list/detail/{id}?id="+id)
@@ -102,6 +113,7 @@ export default {
         scroll(0, 0);
         },
         infiniteHandler($state) {
+<<<<<<< HEAD
         this.nickName = storage.getItem("login_user");
         axios.get(SERVER.URL+"/feature/board/list/"+this.limit)
         .then((res)=>{
@@ -113,16 +125,25 @@ export default {
                     if(res.data.id !=0){
                         $state.loaded();
                     }
-                    this.limit+=1
-                } else if (!res.data.id) {
+=======
+            setTimeout(() => {
+                if(this.posts) {
+                    this.list = this.list.concat(this.posts[this.limit])
+                    $state.loaded();
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
                     this.limit+=1
                 } else {
                     $state.complete();
                 }
+<<<<<<< HEAD
             }, 0)
         })
         .catch((err) => console.error(err));
         this.getPhotos();
+=======
+            }, 500 )
+            this.getPhotos();
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
     },
     },
 }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <template>
+=======
+con<template>
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
   <div class="user" id="join"> 
         <div class="wrapC table">
             <div class="middle">
@@ -51,6 +55,12 @@ export default {
             moveList(){
                 this.$router.push("/");
             },
+<<<<<<< HEAD
+=======
+            moveUpdate(){
+                this.$router.push("/post/update");
+            },
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
             deletePost(postId){
                 console.log(postId);
                 axios({
@@ -87,4 +97,8 @@ export default {
 
 <style>
 
+<<<<<<< HEAD
 </style> 
+=======
+</style>
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc

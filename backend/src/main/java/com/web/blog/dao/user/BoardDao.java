@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.web.blog.model.user.Board;
 
-public interface BoardDao extends JpaRepository<Board, Integer> {
+public interface BoardDao extends JpaRepository<Board, String> {
 	//List<Board> findBoardBySubject(String title);
 	List<Board> findBoardBySubjectLike(String title);
 	List<Board> findBoardByContentLike(String content);
