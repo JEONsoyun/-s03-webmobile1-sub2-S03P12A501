@@ -26,7 +26,6 @@ import com.web.blog.model.user.Board;
 import com.web.blog.model.user.Heart;
 import com.web.blog.model.user.HeartPK;
 import com.web.blog.model.user.Post;
-import com.web.blog.model.user.SignupRequest;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -34,49 +33,47 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "*" })
 @RequestMapping("feature/board")
 public class BoardController {
-	@Autowired
-	BoardDao boardDao;
-	@Autowired
-	HeartDao heartDao;
-	
-	
-	
-	@ApiOperation(value="수정하기", response = BoardController.class)
-	@PutMapping("/update")
-	public Object like(@RequestBody Board request) throws Exception {
-		Optional<Board> board = boardDao.findById(request.getId());
-		ResponseEntity response = null;
-		final BasicResponse result = new BasicResponse();
-		if (board.isPresent()) {
-			Board b = board.get();
-			b.setSubject(request.getSubject());
-			b.setContent(request.getContent());
-			boardDao.save(b);
-			result.status = true;
-			result.data = "success";
-			response = new ResponseEntity<>(result, HttpStatus.OK);
-		}else{
-
-			result.status = false;
-			result.data = "fail to Update";
-			response = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-		}
-		return response;
-	}
-
+   @Autowired
+   BoardDao boardDao;
+   @Autowired
+   HeartDao heartDao;
    
-   @ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
-   @GetMapping("list")
-   public List<Post> getBoardList() throws Exception {
-      List<Board> list = boardDao.findAll();
-      List<Post> plist = new ArrayList<Post>();
-      for(Board b : list){
-         int lnt = heartDao.findHeartByBid(b.getId()+"").size();
-         plist.add(new Post(b,lnt, 0, false));
+   
+   
+   @ApiOperation(value="수정하기", response = BoardController.class)
+   @PutMapping("/update")
+   public Object like(@RequestBody Board request) throws Exception {
+      Optional<Board> board = boardDao.findById(request.getId());
+      ResponseEntity response = null;
+      final BasicResponse result = new BasicResponse();
+      if (board.isPresent()) {
+         Board b = board.get();
+         b.setSubject(request.getSubject());
+         b.setContent(request.getContent());
+         boardDao.save(b);
+         result.status = true;
+         result.data = "success";
+         response = new ResponseEntity<>(result, HttpStatus.OK);
+         return response;
       }
-      plist.sort((a,b)->b.getId()-a.getId());
-      return plist;
+      result.status = false;
+      result.data = "fail to Update";
+      response = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+      return response;
    }
+	
+	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
+	@GetMapping("list")
+	public List<Post> getBoardList() throws Exception {
+		List<Board> list = boardDao.findAll();
+		List<Post> plist = new ArrayList<Post>();
+		for(Board b : list){
+			int lnt = heartDao.findHeartByBid(b.getId()+"").size();
+			plist.add(new Post(b,lnt, 0, false));
+		}
+		plist.sort((a,b)->b.getId()-a.getId());
+		return plist;
+	}
 
    @ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardController.class)
    @GetMapping("list/detail/{id}")

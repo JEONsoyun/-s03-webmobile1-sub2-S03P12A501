@@ -12,6 +12,5 @@ import lombok.NoArgsConstructor;
 public class HeartPK implements Serializable {
 	private String bid;
 	private String uid;
-	
 }
  
