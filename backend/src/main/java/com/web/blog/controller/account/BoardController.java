@@ -1,5 +1,6 @@
 package com.web.blog.controller.account;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,6 @@ import com.web.blog.model.user.Board;
 import com.web.blog.model.user.Heart;
 import com.web.blog.model.user.HeartPK;
 import com.web.blog.model.user.Post;
-import com.web.blog.model.user.SignupRequest;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -64,9 +64,15 @@ public class BoardController {
 	
 	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
 	@GetMapping("list")
-	public List<Board> getBoardList() throws Exception {
+	public List<Post> getBoardList() throws Exception {
 		List<Board> list = boardDao.findAll();
-		return list;
+		List<Post> plist = new ArrayList<Post>();
+		for(Board b : list){
+			int lnt = heartDao.findHeartByBid(b.getId()+"").size();
+			plist.add(new Post(b,lnt, 0, false));
+		}
+		plist.sort((a,b)->b.getId()-a.getId());
+		return plist;
 	}
 
 	@ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardController.class)
