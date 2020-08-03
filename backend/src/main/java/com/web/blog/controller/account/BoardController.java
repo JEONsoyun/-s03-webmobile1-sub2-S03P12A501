@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,29 +97,25 @@ public class BoardController {
       return new Post(0,"삭제된 Board","",null,"","","",0,0,0,false);
    }
 
-   @ApiOperation(value = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-   @PostMapping("/write")
-   public Board writeBoard(@RequestBody Board board) {
-      // board = new Board(0, "test", "test", null, 0, "unknown", 300);
+	
+	@ApiOperation(value = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+	@PostMapping("/write")
+	public Board writeBoard(@RequestBody Board board) {
+		// board = new Board(0, "test", "test", null, 0, "unknown", 300);
 
-      return boardDao.save(board);
-   }
-   
-   @ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)
-   @DeleteMapping("delete/{id}")
-   public Optional<Board> deleteBoard(@PathVariable("id") int id) {
-      Optional<Board> boardId = boardDao.findById(id);
-      System.out.println(id);
-      System.out.println(boardId);
-      boardDao.deleteById(id);
-      List<Heart> heart = heartDao.findHeartByBid(id+"");
-      if(heart!=null) {
-         
-         for(Heart h : heart) {
-            heartDao.deleteById(new HeartPK(h.getBid(),h.getUid()));
-         }
-      }
-      return null;
-   }
+		return boardDao.save(board);
+	}
+	
+	 
+	 @ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)    
+	   @DeleteMapping("delete/{id}")
+	   public Optional<Board> deleteBoard(@PathVariable("id") int id) {
+		   Optional<Board> boardId = boardDao.findById(id);
+		   System.out.println(id); 
+		   System.out.println(boardId);
+	      boardDao.deleteById(id);
+	      return null;
+	   }
+  
 
 }

@@ -24,6 +24,10 @@ export default {
             WRITECOMPLETE:"writeComplete",
             POSTDETAIL:"postDetail",
             DETAIL:"detail",
+<<<<<<< HEAD
+            UPDATE:"update"
+=======
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
         },
     }
 }

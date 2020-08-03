@@ -8,7 +8,7 @@
       dark
     > 
       <v-btn text to="/"><v-toolbar-title>
-        SS_log</v-toolbar-title>
+        비상구</v-toolbar-title>
       </v-btn>
       <v-spacer></v-spacer>
       <div v-if="loginStatus">
@@ -104,6 +104,7 @@ export default {
         constants.URL_TYPE.POST.WRITE,
         constants.URL_TYPE.POST.WRITECOMPLETE,
         constants.URL_TYPE.POST.DETAIL,
+        constants.URL_TYPE.POST.UPDATE,
       ];
     },
     init() {

@@ -15,14 +15,22 @@
                 </div>
                 <div class="form-wrap">
                     <div class="input-wrap">
+<<<<<<< HEAD
+                       <p>제목: <input v-model="subject" id="subject" type="text" placeholder=this.subject/>{{this.subject}}</p>
+=======
                        <p>제목: <input v-model="subject" id="subject" type="text" placeholder=this.subject/></p>
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
                         <p>내용:  <input v-model="content" id="content" type="text" placeholder=this.content/>{{this.content}}</p>
                         <p>작성날짜: {{this.created}}</p>
                     </div>
 
                 </div>
 
+<<<<<<< HEAD
+                <button class="btn" v-on:click="moveUpdate"> 
+=======
                 <button class="btn" v-on:click="moveUpdate()"> 
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
                     <span>
                         정보수정
                     </span>
@@ -67,9 +75,11 @@ export default {
             }
         },
         methods: {
+
             moveList(){
                 this.$router.push("/");
             },
+           
             moveUpdate(){
                 console.log(this.subject)
                 console.log(this.content)
@@ -80,7 +90,11 @@ export default {
                         subject : this.subject,
                         content : this.content,
                         created : this.created,
+<<<<<<< HEAD
+                        
+=======
                         id : this.id
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
                     }
                 }).then((res)=>{
                     var msg ;
@@ -92,6 +106,10 @@ export default {
                     this.$router.push("/");
                 })
             },
+<<<<<<< HEAD
+           
+=======
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
             deletePost(postId){
                 console.log(postId);
                 axios({
@@ -135,6 +153,7 @@ export default {
                 
             
         },
+        
 }
 </script>
 

@@ -56,7 +56,7 @@ public class MailSendService {
 		Session session = Session.getDefaultInstance(props,new Authenticator() {
 		 
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("gyw8526@gmail.com", "duddnr1223!");
+				return new PasswordAuthentication("gyw8526@gmail.com", "duddnr1223!!");
 			}
 		});
 		String setfrom = "gyw8526@gmail.com";
