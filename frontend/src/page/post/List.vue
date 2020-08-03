@@ -113,7 +113,6 @@ export default {
         scroll(0, 0);
         },
         infiniteHandler($state) {
-<<<<<<< HEAD
         this.nickName = storage.getItem("login_user");
         axios.get(SERVER.URL+"/feature/board/list/"+this.limit)
         .then((res)=>{
@@ -125,26 +124,14 @@ export default {
                     if(res.data.id !=0){
                         $state.loaded();
                     }
-=======
-            setTimeout(() => {
-                if(this.posts) {
-                    this.list = this.list.concat(this.posts[this.limit])
-                    console.log(this.list)
-                    $state.loaded();
->>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
                     this.limit+=1
                 } else {
                     $state.complete();
                 }
-<<<<<<< HEAD
             }, 0)
         })
         .catch((err) => console.error(err));
         this.getPhotos();
-=======
-            }, 500 )
-            this.getPhotos();
->>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
     },
     },
 }
