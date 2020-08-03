@@ -60,8 +60,6 @@ public class BoardController {
       response = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
       return response;
    }
-
-<<<<<<< HEAD
 	
 	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
 	@GetMapping("list")
@@ -75,21 +73,6 @@ public class BoardController {
 		plist.sort((a,b)->b.getId()-a.getId());
 		return plist;
 	}
-=======
-   
-   @ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
-   @GetMapping("list")
-   public List<Post> getBoardList() throws Exception {
-      List<Board> list = boardDao.findAll();
-      List<Post> plist = new ArrayList<Post>();
-      for(Board b : list){
-         int lnt = heartDao.findHeartByBid(b.getId()+"").size();
-         plist.add(new Post(b,lnt, 0, false));
-      }
-      plist.sort((a,b)->b.getId()-a.getId());
-      return plist;
-   }
->>>>>>> c66a0c38bf3f847ea81d985c2a5348292c83534e
 
    @ApiOperation(value = "게시글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardController.class)
    @GetMapping("list/detail/{id}")

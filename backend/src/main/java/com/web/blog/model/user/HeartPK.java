@@ -12,17 +12,4 @@ import lombok.NoArgsConstructor;
 public class HeartPK implements Serializable {
 	private String bid;
 	private String uid;
-	public String getUid() {
-      return uid;
-   }
-
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
-    public String getUid() {
-      return uid;
-   }
-   public void setUid(String uid) {
-      this.uid = uid;
-   }
 }
