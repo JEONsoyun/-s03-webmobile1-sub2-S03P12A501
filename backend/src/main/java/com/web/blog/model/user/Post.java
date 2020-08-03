@@ -33,6 +33,73 @@ public class Post {
 	private int lnt;
 	private int cnt;
 	private boolean ilike;
+	public int getId() {
+      return id;
+   }
+   public void setId(int id) {
+      this.id = id;
+   }
+   public String getSubject() {
+      return subject;
+   }
+   public void setSubject(String subject) {
+      this.subject = subject;
+   }
+   public String getContent() {
+      return content;
+   }
+   public void setContent(String content) {
+      this.content = content;
+   }
+   public Date getCreated() {
+      return created;
+   }
+   public void setCreated(Date created) {
+      this.created = created;
+   }
+   public String getEmail() {
+      return email;
+   }
+   public void setEmail(String email) {
+      this.email = email;
+   }
+   public String getUid() {
+      return uid;
+   }
+   public void setUid(String uid) {
+      this.uid = uid;
+   }
+   public String getTag() {
+      return tag;
+   }
+   public void setTag(String tag) {
+      this.tag = tag;
+   }
+   public int getHit() {
+      return hit;
+   }
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+   public int getLnt() {
+      return lnt;
+   }
+   public void setLnt(int lnt) {
+      this.lnt = lnt;
+   }
+   public int getCnt() {
+      return cnt;
+   }
+   public void setCnt(int cnt) {
+      this.cnt = cnt;
+   }
+   public boolean isIlike() {
+      return ilike;
+   }
+   public void setIlike(boolean ilike) {
+      this.ilike = ilike;
+   }
 	public Post(Board board, int lnt, int cnt, boolean ilike) {
 		super();
 		this.id = board.getId();
