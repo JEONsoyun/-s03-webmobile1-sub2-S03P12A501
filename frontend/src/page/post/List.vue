@@ -114,6 +114,7 @@ export default {
             setTimeout(() => {
                 if(this.posts) {
                     this.list = this.list.concat(this.posts[this.limit])
+                    console.log(this.list)
                     $state.loaded();
                     this.limit+=1
                 } else {
