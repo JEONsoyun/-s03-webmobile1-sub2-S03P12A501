@@ -60,6 +60,7 @@ export default {
     name:"Post",
     data: () => {
         return {
+            posts:[],
             list:[],
             photos: [],
             limit:1,
@@ -69,9 +70,19 @@ export default {
         InfiniteLoading,
     },
     mounted(){
-        this.getPhotos();
+        this.getPosts()
     },
     methods: {
+        getPosts() {
+            this.nickName = storage.getItem("login_user");
+            axios.get(SERVER.URL+"/feature/board/list/")
+            .then((res)=>{
+                    if(res.data) {
+                        this.posts = res.data}
+                        console.log(this.posts)
+            })
+            .catch((err) => console.error(err));
+        },
         showDetail(id){
             axios
                 .get(SERVER.URL+"/feature/board/list/detail/{id}?id="+id)
@@ -100,24 +111,16 @@ export default {
         scroll(0, 0);
         },
         infiniteHandler($state) {
-        this.nickName = storage.getItem("login_user");
-        axios.get(SERVER.URL+"/feature/board/list/"+this.limit)
-        .then((res)=>{
-            console.log("log"+ res.data)
             setTimeout(() => {
-                if(res.data) {
-                    this.list = this.list.concat(res.data);
+                if(this.posts) {
+                    this.list = this.list.concat(this.posts[this.limit])
                     $state.loaded();
-                    this.limit+=1
-                } else if (!res.data.id) {
                     this.limit+=1
                 } else {
                     $state.complete();
                 }
             }, 500 )
-        })
-        .catch((err) => console.error(err));
-        this.getPhotos();
+            this.getPhotos();
     },
     },
 }
