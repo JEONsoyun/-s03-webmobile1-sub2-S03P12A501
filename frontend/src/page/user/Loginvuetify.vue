@@ -47,6 +47,7 @@
 import "../../assets/css/user.scss";
 import constants from "../../lib/constants";
 import axios from "axios";
+import SERVER from "@/api/api";
 const storage = window.sessionStorage;
 
 export default {
@@ -66,7 +67,7 @@ export default {
       axios({
         method: "get",
         url:
-          "http://localhost:8080/account/login?email=" +
+          SERVER.URL+"/account/login?email=" +
           this.email +
           "&password=" +
           this.password,

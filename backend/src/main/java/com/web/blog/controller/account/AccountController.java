@@ -62,12 +62,13 @@ public class AccountController {
 			User loginUser = userOpt.get();
 
 			String token = jwtService.create(loginUser);
-
+			
 			res.setHeader("jwt-auth-token", token);
 
 			result.status = true;
 			result.data = "success";
 			result.object = loginUser;
+			
 			response = new ResponseEntity<>(result, HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -76,13 +77,6 @@ public class AccountController {
 		return response;
 	}
 
-	@GetMapping("/account/logout")
-	@ApiOperation(value="로그아웃")
-	public Object logout(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		session.invalidate();
-		return "/account";
-	}
 	
 	@PostMapping("/account/signup")
 	@ApiOperation(value = "가입하기")

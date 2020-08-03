@@ -7,14 +7,6 @@
                     <div class="input-wrap">
                         <p>닉네임: {{nickName}}</p>
                         <p>이메일: {{email}}</p>
-                        <input v-model="nickName"
-                            id="nickname" type="text" readonly/>
-                    </div>
-
-                    <div class="input-wrap">
-                        <input v-model="email" 
-                            id="email"
-                            type="text" readonly/>
                     </div>
 
                 </div>
@@ -29,6 +21,11 @@
                         메인화면
                     </span>
                 </button>
+                <button class="btn" v-on:click="moveDelete">
+                    <span>
+                        탈퇴
+                    </span>
+                </button>
             </div>
 
 
@@ -40,10 +37,11 @@
 
 <script>
 import axios from 'axios';
-
+import SERVER from "@/api/api";
 const storage = window.sessionStorage;
 
 export default {
+    
     data: () => {
             return {
                 email: '',
@@ -56,6 +54,8 @@ export default {
             },
             moveUpdate(){
                 this.$router.push("/user/update");
+            },moveDelete(){
+                this.$router.push("/user/delete");
             },
             
         },
@@ -65,7 +65,7 @@ export default {
             
             axios({
                 method:"get",
-                url:"http://localhost:8080/user/detail?uid="+this.nickName,
+                url:SERVER.URL+"/user/detail?uid="+this.nickName,
             }).then((res)=>{
                 if(res.data.status){
                     this.password = res.data.object.password;

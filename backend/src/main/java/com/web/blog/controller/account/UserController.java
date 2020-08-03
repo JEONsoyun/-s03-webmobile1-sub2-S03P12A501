@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 		@ApiResponse(code = 403, message = "Forbidden", response = BasicResponse.class),
 		@ApiResponse(code = 404, message = "Not Found", response = BasicResponse.class),
 		@ApiResponse(code = 500, message = "Failure", response = BasicResponse.class) })
-//port 2개를 열어놓을때 ... Vue를 3000번으로 열어줘야한다
+//port 2개를 열어놓을때 ... Vue를 번으로 열어줘야한다
 @CrossOrigin(origins = { "*" })
 @RestController
 public class UserController {
@@ -60,7 +60,9 @@ public class UserController {
     public Object update(@RequestBody User request) throws Exception {
         ResponseEntity response = null;
         final BasicResponse result = new BasicResponse();
+       
         Optional<User> user = userDao.findUserByUid(request.getUid());
+        
         if(user.isPresent()) {
         	System.out.println("수정");
         	System.out.println(request.getPassword());
@@ -69,11 +71,11 @@ public class UserController {
         	if(request.getPassword()!=null) {
         		u.setPassword(request.getPassword());
         	}
-        	userDao.save(u);
+        	u = userDao.save(u);
         	// Password는 별도 
         	result.status = true;
         	result.data = "success";
-        	result.object = user.get();
+        	result.object = u;
         	System.out.println(user.get());
         	response = new ResponseEntity<>(result, HttpStatus.OK);
         	

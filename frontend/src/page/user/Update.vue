@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="input-wrap password-wrap">
-                        <input v-model="password"
+                        <input v-model="password" 
                             id="password" 
                             :type="passwordType"
                             placeholder="비밀번호를 입력해주세요"/>
@@ -72,6 +72,7 @@
 
 <script>
 import axios from 'axios';
+import SERVER from "@/api/api";
 const storage = window.sessionStorage;
 console.log(storage);
 export default {
@@ -90,7 +91,7 @@ export default {
             this.email = storage.getItem("user_email");
             axios({
                 method:"get",
-                url:"http://localhost:8080/user/update?uid="+this.nickName,
+                url:SERVER.URL+"/user/update?uid="+this.nickName,
             }).then((res)=>{
                 if(res.data.status){
                     console.log(res.data);
@@ -110,7 +111,7 @@ export default {
             userUpdate(){
                 axios({
                     method:"put",
-                    url:"http://localhost:8080/user/update",
+                    url:SERVER.URL+"/user/update",
                     data:{
                         email:this.email,
                         password:this.password,
@@ -119,7 +120,10 @@ export default {
                 }).then((res)=>{
                     if(res.data.status){
                         alert("수정이 완료되었습니다.");
-                        this.moveList();
+                        storage.setItem("jwt-auth-token","");
+                        storage.setItem("login_user","");
+                        stotage.setItem("user_email","");
+                        this.$router.push("/user/logintest");
                     }else{
 
                     }

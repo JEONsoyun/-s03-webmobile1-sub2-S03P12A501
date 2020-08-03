@@ -6,8 +6,6 @@ import constants from "../lib/constants";
 // 유저
 import Loginvutify from "../page/user/Loginvuetify.vue";
 import Joinvuetify from "../page/user/Joinvuetify.vue";
-import Login from "../page/user/Login.vue";
-import Join from "../page/user/Join.vue";
 import Signup from "../page/user/Signup.vue";
 import Authentication from "../page/user/Authentication";
 import Detail from "../page/user/Detail";
@@ -19,6 +17,7 @@ import List from "../page/post/List.vue";
 import Write from "../page/post/Write.vue";
 import WriteComplete from "../page/post/WriteComplete.vue";
 import postDetail from "../page/post/Detail.vue";
+import postUpdate from "../page/post/Update.vue"
 //검색
 import Search from "../views/search/Search.vue";
 Vue.use(Router);
@@ -31,13 +30,6 @@ const routes = [
     component: List,
   },
   // 로그인/가입
-  /*
-  {
-    path: "/user/login",
-    name: constants.URL_TYPE.USER.LOGIN,
-    component: Login,
-  },
-  */
   {
     path: "/user/jointest",
     name: constants.URL_TYPE.USER.JOIN,
@@ -54,12 +46,6 @@ const routes = [
     component: Detail,
   },
   {
-    path: "/user/join",
-    name: constants.URL_TYPE.USER.JOIN,
-    component: Join,
-  },
-  */
-  {
     path: "/user/signup",
     name: constants.URL_TYPE.USER.SIGNUP,
     component: Signup,
@@ -69,14 +55,15 @@ const routes = [
     name: constants.URL_TYPE.USER.AUTH,
     component: Authentication,
   },
-
-
-  /*
-    */
    {
     path: "/user/delete",
     name: constants.URL_TYPE.USER.DELETE,
     component: Delete,
+  },
+  {
+    path: "/user/update",
+    name: constants.URL_TYPE.USER.UPDATE,
+    component: Update,
   },
    {
     path: "/user/detail",
@@ -100,10 +87,15 @@ const routes = [
     component: WriteComplete
   },
   {
-    path: "/post/postDetail",
-    name: constants.URL_TYPE.POST.POSTDETAIL,
+    path: "/post/detail/:id",
+    props: ({params}) => ({id:Number.parseInt(params.id)}),
+    name: constants.URL_TYPE.POST.DETAIL,
     component: postDetail
-  },
+  },{
+    path: "/post/update",
+    name: constants.URL_TYPE.POST.UPDATE,
+    component: postUpdate
+  }
 
 ];
 

@@ -4,8 +4,8 @@
     <div class="post">
         <div class="wrapB">
             <section class="post-list" >
-            <div  v-for="(post, uid) in list" :key="uid">
-                <div class="post-card" v-on:click="showDetail(post.id)">
+            <div v-for="(post, uid) in list" :key="uid">
+                <div class="post-card" v-if="post.id" v-on:click="showDetail(post.id)" >
                     <a style="color: black">
                         <img :src="getcolor(post.id)" class="post-img"/>
                         <div class="contents">
@@ -19,10 +19,11 @@
                             </v-btn>
                             </v-col>
                         </v-row>
+                            <h3>#{{post.id}}</h3>
                             <h3>
                                 {{post.subject}}
                             </h3>
-                            <hr/>
+                            <hr/> 
                             <p class="content">{{post.content}}</p>
                             <span class="date">{{post.created}}</span>  <br/>
                             <span class="comment"><v-icon>mdi-comment-multiple-outline</v-icon>  {{post.cnt}}</span>
@@ -71,6 +72,7 @@ export default {
     mounted(){
         this.getPhotos();
     },
+    
     methods: {
         showDetail(id){
             axios
@@ -103,18 +105,21 @@ export default {
         this.nickName = storage.getItem("login_user");
         axios.get(SERVER.URL+"/feature/board/list/"+this.limit)
         .then((res)=>{
+            
             console.log("log"+ res.data)
             setTimeout(() => {
                 if(res.data) {
                     this.list = this.list.concat(res.data);
-                    $state.loaded();
+                    if(res.data.id !=0){
+                        $state.loaded();
+                    }
                     this.limit+=1
                 } else if (!res.data.id) {
                     this.limit+=1
                 } else {
                     $state.complete();
                 }
-            }, 500 )
+            }, 0)
         })
         .catch((err) => console.error(err));
         this.getPhotos();

@@ -13,6 +13,7 @@ public interface BoardDao extends JpaRepository<Board, Integer> {
 	List<Board> findBoardByContentLike(String content);
 	List<Board> findBoardByUidLike(String uid);
 	List<Board> findBoardByTag(String tag);
-	Optional<Board> findBoardBySubjectAndContentAndUidAndTag(String subject, String content, String uid, String tag);
-
+	Optional<Board> findById(int id);
+	Optional<Board> deleteById(int id);
 }
+

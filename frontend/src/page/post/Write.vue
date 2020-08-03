@@ -1,6 +1,4 @@
-<!-- 
 
--->
 <template>
   <div id="app">
     <v-app id="inspire">
@@ -10,7 +8,7 @@
             <v-col cols="12" sm="8" md="4">
               <v-card class="elevation-12">
                 <v-toolbar color="primary" dark flat>
-                  <v-toolbar-title>글올리기</v-toolbar-title>
+                  <v-toolbar-title>글 작성</v-toolbar-title>
                   <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-card-text>
@@ -50,7 +48,7 @@
 
 <script>
 import "../../assets/css/user.scss";
-
+import SERVER from "@/api/api";
 import constants from "../../lib/constants";
 import axios from "axios";
 import { required, rules, valid } from "vuelidate/lib/validators";
@@ -68,7 +66,7 @@ export default {
     this.uid=storage.getItem("login_user");
       axios({
         method: "post",
-        url: "http://localhost:8080/feature/board/write/",
+        url: SERVER.URL+"/feature/board/write/",
         data: {
           subject:this.subject,
           content:this.content,
@@ -77,8 +75,12 @@ export default {
         },
       })
         .then((res) => { 
+          
+          alert("글쓰기 성공~");
+          this.$router.push("/");
+
           if (res.data.status) {
-            this.$router.push("/post/writeComplete");
+            this.$router.push("/");
           }
         })
         .catch((err) => console.log(err.response.data));

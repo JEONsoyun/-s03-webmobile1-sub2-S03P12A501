@@ -45,7 +45,7 @@ export default {
         console.log(this.userkey);
         axios({
             method:"get",
-            url:'http://localhost:8080/account/key_alter?uid='+this.uid+'&userkey='+this.userkey,
+            url:'http://i3a501.p.ssafy.io:8080/account/key_alter?uid='+this.uid+'&userkey='+this.userkey,
 
         }).then((res)=>{
             if(res.data.status){
