@@ -75,8 +75,12 @@ export default {
         },
       })
         .then((res) => { 
+          
+          alert("글쓰기 성공~");
+          this.$router.push("/");
+
           if (res.data.status) {
-            this.$router.push("/post/writeComplete");
+            this.$router.push("/");
           }
         })
         .catch((err) => console.log(err.response.data));

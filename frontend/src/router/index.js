@@ -17,6 +17,7 @@ import List from "../page/post/List.vue";
 import Write from "../page/post/Write.vue";
 import WriteComplete from "../page/post/WriteComplete.vue";
 import postDetail from "../page/post/Detail.vue";
+import postUpdate from "../page/post/Update.vue"
 //검색
 import Search from "../views/search/Search.vue";
 Vue.use(Router);
@@ -90,7 +91,11 @@ const routes = [
     props: ({params}) => ({id:Number.parseInt(params.id)}),
     name: constants.URL_TYPE.POST.DETAIL,
     component: postDetail
-  },
+  },{
+    path: "/post/update",
+    name: constants.URL_TYPE.POST.UPDATE,
+    component: postUpdate
+  }
 
 ];
 

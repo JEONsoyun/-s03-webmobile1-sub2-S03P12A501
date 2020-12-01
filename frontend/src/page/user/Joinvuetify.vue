@@ -107,6 +107,7 @@ export default {
       })
         .then((res) => {
           if (res.data.status) {
+            alert("이메일 인증!!");
             this.$router.push("/user/signup");
           }
         })

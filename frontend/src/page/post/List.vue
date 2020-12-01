@@ -4,8 +4,8 @@
     <div class="post">
         <div class="wrapB">
             <section class="post-list" >
-            <div  v-for="(post, uid) in list" :key="uid">
-                <div class="post-card" v-on:click="showDetail(post.id)">
+            <div v-for="(post, uid) in list" :key="uid">
+                <div class="post-card" v-if="post.id" v-on:click="showDetail(post.id)" >
                     <a style="color: black">
                         <img :src="getcolor(post.id)" class="post-img"/>
                         <div class="contents">
@@ -19,10 +19,11 @@
                             </v-btn>
                             </v-col>
                         </v-row>
+                            <h3>#{{post.id}}</h3>
                             <h3>
                                 {{post.subject}}
                             </h3>
-                            <hr/>
+                            <hr/> 
                             <p class="content">{{post.content}}</p>
                             <span class="date">{{post.created}}</span>  <br/>
                             <span class="comment"><v-icon>mdi-comment-multiple-outline</v-icon>  {{post.cnt}}</span>
@@ -60,6 +61,7 @@ export default {
     name:"Post",
     data: () => {
         return {
+            posts:[],
             list:[],
             photos: [],
             limit:1,
@@ -69,9 +71,20 @@ export default {
         InfiniteLoading,
     },
     mounted(){
-        this.getPhotos();
+        this.getPosts()
     },
+    
     methods: {
+        getPosts() {
+            this.nickName = storage.getItem("login_user");
+            axios.get(SERVER.URL+"/feature/board/list/")
+            .then((res)=>{
+                    if(res.data) {
+                        this.posts = res.data}
+                        console.log(this.posts)
+            })
+            .catch((err) => console.error(err));
+        },
         showDetail(id){
             axios
                 .get(SERVER.URL+"/feature/board/list/detail/{id}?id="+id)
@@ -100,24 +113,38 @@ export default {
         scroll(0, 0);
         },
         infiniteHandler($state) {
+<<<<<<< HEAD
         this.nickName = storage.getItem("login_user");
         axios.get(SERVER.URL+"/feature/board/list/"+this.limit)
         .then((res)=>{
+            
             console.log("log"+ res.data)
             setTimeout(() => {
                 if(res.data) {
                     this.list = this.list.concat(res.data);
+                    if(res.data.id !=0){
+                        $state.loaded();
+                    }
+=======
+            setTimeout(() => {
+                if(this.posts) {
+                    this.list = this.list.concat(this.posts[this.limit])
+                    console.log(this.list)
                     $state.loaded();
-                    this.limit+=1
-                } else if (!res.data.id) {
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
                     this.limit+=1
                 } else {
                     $state.complete();
                 }
-            }, 500 )
+<<<<<<< HEAD
+            }, 0)
         })
         .catch((err) => console.error(err));
         this.getPhotos();
+=======
+            }, 500 )
+            this.getPhotos();
+>>>>>>> 6366d9cb738e0cae8b6354baf9054c1df4e692fc
     },
     },
 }
